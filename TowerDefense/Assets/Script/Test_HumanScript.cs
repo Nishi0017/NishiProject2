@@ -22,7 +22,7 @@ public class Test_HumanScript : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.S))
         {
             isStart = !isStart;
             animator.SetBool("walk_bool", isStart);
