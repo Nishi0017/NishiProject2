@@ -546,6 +546,7 @@
 "Assets/Oculus/SampleFramework/Usage/TouchPro/Scripts/Ui/UiSceneMenu.cs"
 "Assets/Oculus/SampleFramework/Usage/TouchPro/Scripts/Ui/UiVectorInspector.cs"
 "Assets/Oculus/Voice/Lib/Wit.ai/AssemblyInfo.cs"
+"Assets/Script/ControlLimitScript.cs"
 "Assets/Script/Test_HumanScript.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0
