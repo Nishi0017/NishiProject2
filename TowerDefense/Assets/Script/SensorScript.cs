@@ -1,69 +1,133 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEngine;
-using UnityEditor;
-using Unity.VisualScripting;
 
 public class SensorScript : MonoBehaviour
 {
-    [SerializeField] private SphereCollider searchArea = default;
-    public float searchAngle = 45f;
-    public float searchRadius;
+    public float searchRadius = 10f;
+    public float searchAngle = 70f;
+    private float angle;
+    [SerializeField] Transform box;
     [SerializeField] private GameObject control;
+    private Vector3 idlePos;
 
-    [SerializeField] private bool editor;
+    private Collider[] hitColliders;
+    [SerializeField] private List<GameObject> visibleEnemies = new List<GameObject>();
 
-    private Ray ray;
-    private RaycastHit hit;
+    [SerializeField] private GameObject closestEnemy;
+    private GameObject target = null;
+    private float closestDistance;
 
+
+    private Vector3 directionToEnemy;
+    private float angleToEnemy;
+    private float distanceToEnemy;
+
+    public bool canShot = false;
 
     private void Start()
     {
-        searchArea = GetComponent<SphereCollider>();
-        searchRadius = searchArea.radius;
+        idlePos = control.transform.position;
     }
 
-    private void OnTriggerStay(Collider other)
+    void Update()
     {
-        if(other.gameObject.tag == "Enemy")
+        // Find all enemies with "Enemy" tag within search radius
+        hitColliders = Physics.OverlapSphere(transform.position, searchRadius, LayerMask.GetMask("Enemies"));
+
+        visibleEnemies.Clear();
+        foreach (Collider hitCollider in hitColliders)
         {
-            var playerDirection  = other.transform.position - transform.position;
-
-            var angle = Vector3.Angle(transform.up, playerDirection);
-
-            if(angle <= searchAngle)
+            Vector3 direction = hitCollider.transform.position - transform.position;
+            direction.y = 0f;
+            angle = Vector3.Angle(direction, box.forward);
+            if (angle <= searchAngle * 0.5f)
             {
-                ray = new Ray(transform.position, playerDirection);
-                Debug.DrawRay(ray.origin, ray.direction * searchRadius, Color.red);
-
-                if(Physics.Raycast(ray.origin, ray.direction* searchRadius, out hit))
+                // Check if there is any obstacle between the sensor and the enemy
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, direction, out hit, searchRadius))
                 {
-                    if(hit.collider.CompareTag("Enemy"))
+                    if (hit.collider == hitCollider)
                     {
-                        control.transform.position = Vector3.Lerp(control.transform.position, other.gameObject.transform.position, 0.1f);
-                    }
-                    else
-                    {
-                        control.transform.position = Vector3.Lerp(control.transform.position, transform.position, 0.1f);
+                        // The enemy is visible to the sensor
+                        visibleEnemies.Add(hitCollider.gameObject);
                     }
                 }
+            }
+        }
 
-            }
-            else if(angle > searchAngle)
+        // Find closest enemy
+        if (visibleEnemies.Count > 0)
+        {
+            closestEnemy = null;
+            closestDistance = Mathf.Infinity;
+
+            foreach (GameObject enemy in visibleEnemies)
             {
-                control.transform.position = Vector3.Lerp(control.transform.position, transform.position, 0.1f);
+                directionToEnemy = (enemy.transform.position - transform.position).normalized;
+                directionToEnemy.y = 0f;
+                angleToEnemy = Vector3.Angle(directionToEnemy, box.forward);
+
+                if (angleToEnemy <= searchAngle * 0.5f)
+                {
+                    RaycastHit hit;
+                    // Cast a ray towards the enemy to check if there are any obstacles in between
+                    if (Physics.Raycast(transform.position, directionToEnemy, out hit, Mathf.Infinity))
+                    {
+                        if (hit.collider.gameObject == enemy)
+                        {
+                            distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+                            if (distanceToEnemy < closestDistance)
+                            {
+                                closestEnemy = enemy;
+                                closestDistance = distanceToEnemy;
+                                if(target != closestEnemy)
+                                {
+                                    target = closestEnemy;
+                                }
+                            }
+                        }
+                    }
+                }
             }
+
+            // Move control object towards closest enemy
+            if (closestEnemy != null)
+            {
+                control.transform.position = Vector3.Lerp(control.transform.position, target.transform.GetChild(0).transform.position, 0.1f);
+
+                if (!canShot)
+                {
+                    canShot = true;
+                }
+            }
+        }
+        else if (control.transform.position != transform.position)
+        {
+            control.transform.position = Vector3.Lerp(control.transform.position, idlePos, 0.1f);
+
+            if (canShot)
+            {
+                canShot = false;
+            }
+        }
+
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        // 削除されたGameObjectにアクセスしていないことを確認する
+        if (visibleEnemies.Contains(other.gameObject))
+        {
+            visibleEnemies.Remove(other.gameObject);
         }
     }
 
-    private void OnTriggerExit(Collider other)
+
+    void OnDrawGizmosSelected()
     {
-        control.transform.position = transform.position;
-    }
-    
-    private void OnDrawGizmos()
-    {
-        Handles.color = Color.red;
-        Handles.DrawSolidArc(transform.position, Vector3.right, Quaternion.Euler(-searchAngle, 0f, 0f) * transform.up, searchAngle * 2f, searchArea.radius * 0.1f);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, searchRadius);
     }
 }
