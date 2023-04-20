@@ -6,7 +6,9 @@ public class ControlLimitScript2 : MonoBehaviour
 {
     private Vector3 pos;
 
-    [SerializeField] SensorScript sensorScript;
+    [SerializeField] GameObject sensorObject;
+    private Vector3 centerPos;
+    private SensorScript sensorScript;
     private float sensorRadius;
     private float sensorAngle;
     private float x_angle;
@@ -16,8 +18,8 @@ public class ControlLimitScript2 : MonoBehaviour
 
     public enum MoveDirection
     {
-        YZ,
         XZ,
+        YZ,
         All
     }
     public MoveDirection moveDirection;
@@ -35,6 +37,9 @@ public class ControlLimitScript2 : MonoBehaviour
 
     private void Start()
     {
+        sensorScript = sensorObject.GetComponent<SensorScript>();
+        centerPos = sensorObject.transform.position - transform.position;
+
         pos = transform.localPosition;
 
         sensorRadius = sensorScript.searchRadius;
@@ -46,13 +51,14 @@ public class ControlLimitScript2 : MonoBehaviour
 
         switch (moveDirection)
         {
+            case MoveDirection.XZ:
+                y_max = pos.y;
+                break;
             case MoveDirection.YZ:
                 x_max = pos.x;
                 y_angle = Mathf.Tan(yAngleLimit);
                 break;
-            case MoveDirection.XZ:
-                y_max = pos.y;
-                break;
+
             case MoveDirection.All:
                 break;
         }
@@ -61,49 +67,28 @@ public class ControlLimitScript2 : MonoBehaviour
     private void Update()
     {
         switch (moveDirection)
-        {
-            case MoveDirection.YZ:
+        {            
+            case MoveDirection.XZ:
                 pos.z = Mathf.Clamp(transform.localPosition.z, -sensorRadius, sensorRadius);
-                /*
-                y_max = Mathf.Sqrt(sensorRadius * sensorRadius - pos.z * pos.z);
-                pos.y = Mathf.Clamp(pos.z, -z_max, z_max);
-                line = pos.z * y_angle;
-                if(yAcuteAngle)
-                {
-                    pos.y = Mathf.Clamp(pos.y, -line, line);
-                }
-                else if(pos.z < 0)
-                {
-                    if(pos.y >= 0)
-                    {
-                        pos.y = System.Math.Max(pos.y, line);
-                    }
-                    else
-                    {
-                        pos.y = System.Math.Min(pos.y, -line);
-                    }
-                }
-                */
+                x_max = Mathf.Sqrt(sensorRadius * sensorRadius - pos.z * pos.z);
+                pos.x = Mathf.Clamp(transform.localPosition.x, -x_max, x_max);
                 break;
 
-            case MoveDirection.XZ:
-                pos.x = Mathf.Clamp(transform.localPosition.x, -x_max, x_max);
-                pos.z = Mathf.Clamp(transform.localPosition.z, -z_max, z_max);
-                line = Mathf.Tan(xAngleLimit * Mathf.Deg2Rad) * pos.x;
-                pos.z = Mathf.Clamp(pos.z, line, -line);
-                line = Mathf.Tan(zAngleLimit * Mathf.Deg2Rad) * pos.z;
-                pos.x = Mathf.Clamp(pos.x, line, -line);
-                break;
-            case MoveDirection.All:
-                pos.x = Mathf.Clamp(transform.localPosition.x, -x_max, x_max);
+            case MoveDirection.YZ:
+                pos.z = Mathf.Clamp(transform.localPosition.z, -sensorRadius, sensorRadius);
+                y_max = Mathf.Sqrt(sensorRadius * sensorRadius - pos.z * pos.z);
                 pos.y = Mathf.Clamp(transform.localPosition.y, -y_max, y_max);
-                pos.z = Mathf.Clamp(transform.localPosition.z, -z_max, z_max);
-                line = Mathf.Tan(xAngleLimit * Mathf.Deg2Rad) * pos.x;
-                pos.y = Mathf.Clamp(pos.y, line, -line);
-                line = Mathf.Tan(yAngleLimit * Mathf.Deg2Rad) * pos.y;
-                pos.z = Mathf.Clamp(pos.z, line, -line);
-                line = Mathf.Tan(zAngleLimit * Mathf.Deg2Rad) * pos.z;
-                pos.x = Mathf.Clamp(pos.x, line, -line);
+                break;
+
+
+            case MoveDirection.All:
+                pos.z = Mathf.Clamp(transform.localPosition.z, -sensorRadius, sensorRadius);
+
+                x_max = Mathf.Sqrt(sensorRadius * sensorRadius - pos.z * pos.z);
+                pos.x = Mathf.Clamp(transform.localPosition.y, -x_max, x_max);
+
+                y_max = Mathf.Sqrt(sensorRadius * sensorRadius - pos.z * pos.z);
+                pos.y = Mathf.Clamp(transform.localPosition.x, -y_max, y_max);
                 break;
 
         }

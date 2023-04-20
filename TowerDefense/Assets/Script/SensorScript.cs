@@ -7,9 +7,13 @@ public class SensorScript : MonoBehaviour
 {
     public float searchRadius = 10f;
     public float searchAngle = 70f;
+
     private float angle;
-    [SerializeField] Transform box;
+
+    [SerializeField] Transform bodyObject;
     [SerializeField] private GameObject control;
+
+    //èâä˙à íu
     private Vector3 idlePos;
 
     private Collider[] hitColliders;
@@ -29,6 +33,9 @@ public class SensorScript : MonoBehaviour
     private void Start()
     {
         idlePos = control.transform.position;
+
+        searchRadius = gameObject.GetComponent<SphereCollider>().radius;
+
     }
 
     void Update()
@@ -41,7 +48,7 @@ public class SensorScript : MonoBehaviour
         {
             Vector3 direction = hitCollider.transform.position - transform.position;
             direction.y = 0f;
-            angle = Vector3.Angle(direction, box.forward);
+            angle = Vector3.Angle(direction, bodyObject.forward);
             if (angle <= searchAngle * 0.5f)
             {
                 // Check if there is any obstacle between the sensor and the enemy
@@ -67,7 +74,7 @@ public class SensorScript : MonoBehaviour
             {
                 directionToEnemy = (enemy.transform.position - transform.position).normalized;
                 directionToEnemy.y = 0f;
-                angleToEnemy = Vector3.Angle(directionToEnemy, box.forward);
+                angleToEnemy = Vector3.Angle(directionToEnemy, bodyObject.forward);
 
                 if (angleToEnemy <= searchAngle * 0.5f)
                 {
