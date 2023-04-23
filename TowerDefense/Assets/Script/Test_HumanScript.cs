@@ -8,28 +8,23 @@ public class Test_HumanScript : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
 
-    public GameObject startPosition;
-    public GameObject goalPosition;
+    public Transform goalPosition;
     private bool isStart = false;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-
-        transform.position = startPosition.transform.position;
+        animator.SetBool("walk_bool", true);
+        agent.destination = goalPosition.position;
     }
 
-    private void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (other.gameObject.tag == "goal")
         {
-            isStart = !isStart;
-            animator.SetBool("walk_bool", isStart);
-        }
-        if(isStart)
-        {
-            agent.destination = goalPosition.transform.position;
+            animator.SetBool("walk_bool", false);
+            Destroy(gameObject);
         }
     }
 }
