@@ -7,6 +7,7 @@ public class ControlLimitScript2 : MonoBehaviour
     private Vector3 pos;
 
     [SerializeField] GameObject sensorObject;
+
     private Vector3 centerPos;
     private SensorScript sensorScript;
     private float sensorRadius;
@@ -67,7 +68,7 @@ public class ControlLimitScript2 : MonoBehaviour
     private void Update()
     {
         switch (moveDirection)
-        {            
+        {
             case MoveDirection.XZ:
                 pos.z = Mathf.Clamp(transform.localPosition.z, -sensorRadius, sensorRadius);
                 x_max = Mathf.Sqrt(sensorRadius * sensorRadius - pos.z * pos.z);
@@ -85,10 +86,10 @@ public class ControlLimitScript2 : MonoBehaviour
                 pos.z = Mathf.Clamp(transform.localPosition.z, -sensorRadius, sensorRadius);
 
                 x_max = Mathf.Sqrt(sensorRadius * sensorRadius - pos.z * pos.z);
-                pos.x = Mathf.Clamp(transform.localPosition.y, -x_max, x_max);
+                pos.x = Mathf.Clamp(transform.localPosition.x, -x_max, x_max);
 
                 y_max = Mathf.Sqrt(sensorRadius * sensorRadius - pos.z * pos.z);
-                pos.y = Mathf.Clamp(transform.localPosition.x, -y_max, y_max);
+                pos.y = Mathf.Clamp(transform.localPosition.y, -y_max, y_max);
                 break;
 
         }
