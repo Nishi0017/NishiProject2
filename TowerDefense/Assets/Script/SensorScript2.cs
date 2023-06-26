@@ -1,3 +1,4 @@
+﻿using Oculus.Platform.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security;
@@ -5,187 +6,72 @@ using UnityEngine;
 
 public class SensorScript2 : MonoBehaviour
 {
-    public enum MoveDirection
-    {
-        XZ,
-        YZ,
-        All
-    }
-    public MoveDirection moveDirection;
-
+    //防衛施設の感知距離、感知角度を表す変数
+    //public：施設の強化や敵の能力で変化させるため
     public float searchRadius = 10f;
     public float searchAngle = 70f;
 
-    private float angle;
+    //防衛施設の初期位置、正面を保存する変数
+    private Vector3 defaultPos;
+    private Vector3 defaultForward;
 
-    [SerializeField] Transform bodyObject;
-    [SerializeField] private GameObject control;
-
-    //�����ʒu
-    private Vector3 idlePos;
-
-    private Collider[] hitColliders;
-    [SerializeField] private List<GameObject> visibleEnemies = new List<GameObject>();
-
-    [SerializeField] private GameObject closestEnemy;
-    private GameObject target = null;
-    private float closestDistance;
+    //防衛施設の向きを変更させるボーンオブジェクトを入れる変数
+    [SerializeField] private GameObject controlBone;
 
 
-    private Vector3 directionToEnemy;
-    private float angleToEnemy;
-    private float distanceToEnemy;
+    //防衛施設の感知範囲(角度は含まない)にあるオブジェクトを入れる配列
+    private Collider[] objectsInCollider;
 
-    public bool canShot = false;
+    //感知範囲内にいる敵を入れるリスト
+    private List<GameObject> visibleEnemies = new List<GameObject>();
+
+    //visibleEnemiesリスト内で最も距離が近い敵オブジェクトを入れる変数
+    private GameObject closestEnemy;
+
 
     private void Start()
     {
-        idlePos = control.transform.position;
+        //防衛施設の初期位置、正面を保存する
+        defaultPos = controlBone.transform.position;
+        defaultForward = controlBone.transform.forward;
 
+        //防衛施設の感知範囲半径をSphereCollideコンポーネントから取得する
         searchRadius = gameObject.GetComponent<SphereCollider>().radius;
 
-        switch (moveDirection)
-        {
-            case MoveDirection.XZ:
-                break;
-            case MoveDirection.YZ:
-                break;
-            case MoveDirection.All:
-                break;
-        }
-
     }
 
-    void Update()
+    private void Update()
     {
+        //「transform.position」を中心、「searchRadius」を半径とする球体の内部や触れたすべての「Enemies」マスクを持つコライダーを配列で取得する
+        objectsInCollider = Physics.OverlapSphere(transform.position, searchRadius, LayerMask.GetMask("Enemies"));
 
-        switch (moveDirection)
+
+        //感知範囲内にいる敵をvisibleEnemiesリストに入れる
+        foreach(Collider objectInCollider in objectsInCollider)
         {
-            case MoveDirection.XZ:
-                SearchXZ();
-                break;
+            Vector3 directionToEnemy = objectInCollider.transform.position - transform.position;
+            directionToEnemy.y = 0;
+            float angleToEnemy = Vector3.Angle(defaultForward, directionToEnemy);
 
-            case MoveDirection.YZ:
-                SearchYZ();
-                break;
-
-            case MoveDirection.All:
-                SearchAll();
-                break;
-        }
-
-
-
-        
-    }
-
-    private void SearchXZ()
-    {
-        // Find all enemies with "Enemy" tag within search radius
-        hitColliders = Physics.OverlapSphere(transform.position, searchRadius, LayerMask.GetMask("Enemies"));
-
-        visibleEnemies.Clear();
-        foreach (Collider hitCollider in hitColliders)
-        {
-            Vector3 direction = hitCollider.transform.position - transform.position;
-            direction.y = 0f;
-            angle = Vector3.Angle(direction, bodyObject.forward);
-            if (angle <= searchAngle * 0.5f)
+            if(angleToEnemy < searchAngle * 0.5f && IsOtherObjectBetween(objectInCollider.gameObject.transform))
             {
-                // Check if there is any obstacle between the sensor and the enemy
-                RaycastHit hit;
-                if (Physics.Raycast(transform.position, direction, out hit, searchRadius))
-                {
-                    if (hit.collider == hitCollider)
-                    {
-                        // The enemy is visible to the sensor
-                        visibleEnemies.Add(hitCollider.gameObject);
-                    }
-                }
+                visibleEnemies.Add(objectInCollider.gameObject);
             }
         }
 
-        // Find closest enemy
-        if (visibleEnemies.Count > 0)
+        //visibleEnemiesリスト内の敵の中で最も距離が近い敵をclosestEnemy変数に入れる
+
+    }
+
+    bool IsOtherObjectBetween(Transform target)
+    {
+        RaycastHit hit;
+        if (Physics.Linecast(transform.position, target.position, out hit))
         {
-            closestEnemy = null;
-            closestDistance = Mathf.Infinity;
-
-            foreach (GameObject enemy in visibleEnemies)
-            {
-                directionToEnemy = (enemy.transform.position - transform.position).normalized;
-                directionToEnemy.y = 0f;
-                angleToEnemy = Vector3.Angle(directionToEnemy, bodyObject.forward);
-
-                if (angleToEnemy <= searchAngle * 0.5f)
-                {
-                    RaycastHit hit;
-                    // Cast a ray towards the enemy to check if there are any obstacles in between
-                    if (Physics.Raycast(transform.position, directionToEnemy, out hit, Mathf.Infinity))
-                    {
-                        if (hit.collider.gameObject == enemy)
-                        {
-                            distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
-                            if (distanceToEnemy < closestDistance)
-                            {
-                                closestEnemy = enemy;
-                                closestDistance = distanceToEnemy;
-                                if (target != closestEnemy)
-                                {
-                                    target = closestEnemy;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Move control object towards closest enemy
-            if (closestEnemy != null)
-            {
-                control.transform.position = Vector3.Lerp(control.transform.position, target.transform.GetChild(0).transform.position, 0.1f);
-
-                if (!canShot)
-                {
-                    canShot = true;
-                }
-            }
+            return true;
         }
-        else if (control.transform.position != transform.position)
-        {
-            control.transform.position = Vector3.Lerp(control.transform.position, idlePos, 0.1f);
-
-            if (canShot)
-            {
-                canShot = false;
-            }
-        }
-
-    }
-
-    private void SearchYZ()
-    {
-
-    }
-
-    private void SearchAll()
-    {
-
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        // �폜���ꂽGameObject�ɃA�N�Z�X���Ă��Ȃ����Ƃ��m�F����
-        if (visibleEnemies.Contains(other.gameObject))
-        {
-            visibleEnemies.Remove(other.gameObject);
-        }
+        return false;
     }
 
 
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, searchRadius);
-    }
 }

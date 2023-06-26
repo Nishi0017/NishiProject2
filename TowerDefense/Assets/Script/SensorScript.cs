@@ -43,10 +43,13 @@ public class SensorScript : MonoBehaviour
 
     void Update()
     {
-        // Find all enemies with "Enemy" tag within search radius
+        //球体の内部や触れたすべての「Enemies」マスクを持つコライダーの配列を取得する
         hitColliders = Physics.OverlapSphere(transform.position, searchRadius, LayerMask.GetMask("Enemies"));
 
+        //visibleEnemiesリストの初期化
         visibleEnemies.Clear();
+
+        //球体の内部や触れたすべての「Enemies」マスクを持つコライダーに対して、方角を計算し、視野角内にある敵オブジェクトを「visibleEnemies」リストに追加する
         foreach (Collider hitCollider in hitColliders)
         {
             Vector3 direction = hitCollider.transform.position - transform.position;
@@ -54,13 +57,11 @@ public class SensorScript : MonoBehaviour
             angle = Vector3.Angle(direction, bodyObject.forward);
             if (angle <= searchAngle * 0.5f)
             {
-                // Check if there is any obstacle between the sensor and the enemy
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, direction, out hit, searchRadius))
                 {
                     if (hit.collider == hitCollider)
                     {
-                        // The enemy is visible to the sensor
                         visibleEnemies.Add(hitCollider.gameObject);
                     }
                 }
@@ -123,7 +124,7 @@ public class SensorScript : MonoBehaviour
         }
         else if (control.transform.position != transform.position)
         {
-            Debug.Log("Idle位置に戻るよ");
+            Debug.Log("Idle位置に戻るよ" + visibleEnemies.Count);
 
             control.transform.position = Vector3.Lerp(control.transform.position, idlePos, 0.1f);
 
