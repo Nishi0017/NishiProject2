@@ -1,3 +1,4 @@
+using Oculus.Platform.Models;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security;
@@ -5,11 +6,13 @@ using UnityEngine;
 
 public class SensorScript : MonoBehaviour
 {
+
     public float searchRadius = 10f;
     public float searchAngle = 70f;
 
     private float angle;
 
+    [SerializeField] bool rayshot = false;
     [SerializeField] Transform bodyObject;
     [SerializeField] private GameObject control;
 
@@ -102,7 +105,15 @@ public class SensorScript : MonoBehaviour
             // Move control object towards closest enemy
             if (closestEnemy != null)
             {
-                control.transform.position = Vector3.Lerp(control.transform.position, target.transform.GetChild(0).transform.position, 0.1f);
+                if (!rayshot)
+                {
+                    control.transform.position = Vector3.Lerp(control.transform.position, target.transform.GetChild(0).transform.position, 0.1f);
+                }
+                else
+                {
+                    //control.transform.position = Vector3.Lerp(control.transform.position, target.transform.position, 0.1f);
+                    control.transform.position = Vector3.Lerp(control.transform.position, target.transform.position, 1.0f);
+                }
 
                 if (!canShot)
                 {
@@ -112,6 +123,8 @@ public class SensorScript : MonoBehaviour
         }
         else if (control.transform.position != transform.position)
         {
+            Debug.Log("IdleˆÊ’u‚É–ß‚é‚æ");
+
             control.transform.position = Vector3.Lerp(control.transform.position, idlePos, 0.1f);
 
             if (canShot)
