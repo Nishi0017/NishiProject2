@@ -124,7 +124,7 @@ public class SensorScript : MonoBehaviour
         }
         else if (control.transform.position != transform.position)
         {
-            Debug.Log("IdleˆÊ’u‚É–ß‚é‚æ" + visibleEnemies.Count);
+            //Debug.Log("IdleˆÊ’u‚É–ß‚é‚æ" + visibleEnemies.Count);
 
             control.transform.position = Vector3.Lerp(control.transform.position, idlePos, 0.1f);
 

@@ -8,7 +8,7 @@ TagManager:
   - SamplesInfoPanel
   - Enemy
   - goal
-  - Ally
+  - Wall
   layers:
   - Default
   - TransparentFX

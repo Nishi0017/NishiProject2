@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2706785042353953955}
   m_Layer: 0
   m_Name: Gunpoint
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 924967720760143740}
   m_Layer: 0
   m_Name: Con.Gunpoint
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 2190436596067742554}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 4455660506584078577}
   m_Layer: 0
   m_Name: Body
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 6459561733140309910}
   m_Layer: 0
   m_Name: Gatling
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 1524361796509963211}
   m_Layer: 0
   m_Name: Gunpoint
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 3752542318700698464}
   m_Layer: 0
   m_Name: Gunpoint_end
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -501,7 +501,7 @@ GameObject:
   - component: {fileID: 5786699816902734550}
   m_Layer: 0
   m_Name: Armature
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 6311226371096096297}
   m_Layer: 0
   m_Name: Con.Gunpoint_end
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 7263170194261359488}
   m_Layer: 0
   m_Name: Root
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 9084182666031734217}
   m_Layer: 0
   m_Name: Con.GunpointBox
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -646,7 +646,7 @@ GameObject:
   - component: {fileID: 9084182666148726550}
   m_Layer: 0
   m_Name: SensorCollider
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -697,7 +697,6 @@ MonoBehaviour:
   bodyObject: {fileID: 3242215157411471944}
   control: {fileID: 9084182666031734215}
   visibleEnemies: []
-  visibleEnemiesCount: 0
   closestEnemy: {fileID: 0}
   canShot: 0
 --- !u!1 &9084182666180703221
@@ -712,7 +711,7 @@ GameObject:
   - component: {fileID: 9084182666180703223}
   m_Layer: 0
   m_Name: GunpointBox
-  m_TagString: Ally
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -724,7 +723,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9084182666180703221}
-  m_LocalRotation: {x: 0.7071068, y: -0.000002780573, z: 0.000002780573, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0.00000026481646, z: -0.00000026481646, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
