@@ -432,6 +432,7 @@
 -r:"Library/Bee/artifacts/1300b0aE.dag/VoiceSDK.Dictation.Runtime.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/VoiceSDK.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/VoiceSDK.Runtime.ref.dll"
+"Assets/Editor/ReplaceMissingAnimationCurve.cs"
 "Assets/Oculus/SampleFramework/Core/Firebase/Editor/FirebaseEnabler.cs"
 "Assets/Oculus/SampleFramework/Core/Gradle/Editor/Utils.cs"
 "Assets/Oculus/SampleFramework/Core/Locomotion/Scripts/Editor/TeleportTransitionWarpInspector.cs"

@@ -553,9 +553,9 @@
 "Assets/Script/GenerateEnemyScript.cs"
 "Assets/Script/RayShotScript.cs"
 "Assets/Script/SensorScript.cs"
-"Assets/Script/SensorScript2.cs"
 "Assets/Script/ShotScript.cs"
 "Assets/Script/ShotScript2.cs"
+"Assets/Script/ShotScript3.cs"
 "Assets/Script/Test_HumanScript.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0

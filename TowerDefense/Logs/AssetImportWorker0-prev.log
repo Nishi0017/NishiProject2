@@ -15,7 +15,7 @@ C:/Users/rokku/Dropbox/PC/Documents/GitHub/NishiProject2/TowerDefense
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-50022
+53017
 Successfully changed project path to: C:/Users/rokku/Dropbox/PC/Documents/GitHub/NishiProject2/TowerDefense
 C:/Users/rokku/Dropbox/PC/Documents/GitHub/NishiProject2/TowerDefense
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,12 +47,12 @@ C:/Users/rokku/Dropbox/PC/Documents/GitHub/NishiProject2/TowerDefense
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [16320] Host "[IP] 172.18.79.176 [Port] 0 [Flags] 2 [Guid] 442074425 [EditorId] 442074425 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-83SRDD9E) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [13396] Host "[IP] 192.168.20.183 [Port] 0 [Flags] 2 [Guid] 3295620513 [EditorId] 3295620513 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-83SRDD9E) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [16320] Host "[IP] 172.18.79.176 [Port] 0 [Flags] 2 [Guid] 442074425 [EditorId] 442074425 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-83SRDD9E) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [13396] Host "[IP] 192.168.20.183 [Port] 0 [Flags] 2 [Guid] 3295620513 [EditorId] 3295620513 [Version] 1048832 [Id] WindowsEditor(7,LAPTOP-83SRDD9E) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 156.30 ms, found 8 plugins.
-Preloading 1 native plugins for Editor in 0.51 ms.
+Refreshing native plugins compatible for Editor in 127.99 ms, found 8 plugins.
+Preloading 1 native plugins for Editor in 1.22 ms.
 Initialize engine version: 2021.3.16f1 (4016570cf34f)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.16f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path C:/Users/rokku/Dropbox/PC/Documents/GitHub/NishiProject2/TowerDefense/Assets
@@ -68,55 +68,54 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.16f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.16f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.16f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56608
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56384
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.16f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.16f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.032504 seconds.
+Registered in 0.006421 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 142.67 ms, found 8 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
+Refreshing native plugins compatible for Editor in 123.75 ms, found 8 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.618 seconds
+- Completed reload, in  0.626 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1619ms)
-		BeginReloadAssembly (713ms)
+	ReloadAssembly (626ms)
+		BeginReloadAssembly (88ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (2ms)
-		EndReloadAssembly (710ms)
-			LoadAssemblies (708ms)
-			RebuildTransferFunctionScriptingTraits (1ms)
-			SetupTypeCache (273ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (449ms)
+			LoadAssemblies (86ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (88ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (25ms)
-			SetupLoadedEditorAssemblies (356ms)
+			RebuildScriptCaches (19ms)
+			SetupLoadedEditorAssemblies (299ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (58ms)
+				InitializePlatformSupportModulesInManaged (44ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (143ms)
-				BeforeProcessingInitializeOnLoad (2ms)
-				ProcessInitializeOnLoadAttributes (110ms)
-				ProcessInitializeOnLoadMethodAttributes (42ms)
+				RefreshPlugins (124ms)
+				BeforeProcessingInitializeOnLoad (1ms)
+				ProcessInitializeOnLoadAttributes (79ms)
+				ProcessInitializeOnLoadMethodAttributes (51ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.035260 seconds.
-Android Extension - Scanning For ADB Devices 5595 ms
+Registered in 0.007485 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Users\rokku\Dropbox\PC\Documents\GitHub\NishiProject2\TowerDefense\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Symbol file LoadedFromMemory doesn't match image C:\Users\rokku\Dropbox\PC\Documents\GitHub\NishiProject2\TowerDefense\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 381.85 ms, found 8 plugins.
-Preloading 1 native plugins for Editor in 0.10 ms.
+Refreshing native plugins compatible for Editor in 115.84 ms, found 8 plugins.
+Preloading 1 native plugins for Editor in 0.05 ms.
 Package Manager log level set to [2]
 [XR] OculusXRPlugin: registering subsystems
 [XR] Unable to register display lifecyle provider: [1]
@@ -124,44 +123,44 @@ Package Manager log level set to [2]
 [XR] Unable to register input lifecyle provider: [1]
 [XR] OVRP version 1.82.0
 Mono: successfully reloaded assembly
-- Completed reload, in 11.546 seconds
+- Completed reload, in  4.816 seconds
 Domain Reload Profiling:
-	ReloadAssembly (11547ms)
-		BeginReloadAssembly (198ms)
+	ReloadAssembly (4817ms)
+		BeginReloadAssembly (269ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (9ms)
+			DisableScriptedObjects (7ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (55ms)
-		EndReloadAssembly (11224ms)
-			LoadAssemblies (5111ms)
+			CreateAndSetChildDomain (183ms)
+		EndReloadAssembly (3737ms)
+			LoadAssemblies (2660ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (672ms)
+			SetupTypeCache (281ms)
 			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (135ms)
-			SetupLoadedEditorAssemblies (5283ms)
+			RebuildScriptCaches (73ms)
+			SetupLoadedEditorAssemblies (679ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (15ms)
+				InitializePlatformSupportModulesInManaged (9ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (382ms)
-				BeforeProcessingInitializeOnLoad (236ms)
-				ProcessInitializeOnLoadAttributes (1122ms)
-				ProcessInitializeOnLoadMethodAttributes (3522ms)
-				AfterProcessingInitializeOnLoad (6ms)
+				RefreshPlugins (116ms)
+				BeforeProcessingInitializeOnLoad (102ms)
+				ProcessInitializeOnLoadAttributes (376ms)
+				ProcessInitializeOnLoadMethodAttributes (71ms)
+				AfterProcessingInitializeOnLoad (5ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (7ms)
+			AwakeInstancesAfterBackupRestoration (5ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Shader 'Oculus/OVRMRCameraFrameLit': fallback shader 'Alpha-Diffuse' not found
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 1.52 ms, found 8 plugins.
-Preloading 1 native plugins for Editor in 0.06 ms.
+Refreshing native plugins compatible for Editor in 1.30 ms, found 8 plugins.
+Preloading 1 native plugins for Editor in 0.04 ms.
 Unloading 7008 Unused Serialized files (Serialized files now loaded: 0)
 Unloading 68 unused Assets / (0.8 MB). Loaded Objects now: 7437.
-Memory consumption went from 286.7 MB to 285.8 MB.
-Total: 35.570200 ms (FindLiveObjects: 4.491400 ms CreateObjectMapping: 2.338900 ms MarkObjects: 27.422600 ms  DeleteObjects: 1.315200 ms)
+Memory consumption went from 286.6 MB to 285.8 MB.
+Total: 4.652400 ms (FindLiveObjects: 0.921100 ms CreateObjectMapping: 0.620600 ms MarkObjects: 2.634200 ms  DeleteObjects: 0.475900 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -176,67 +175,37 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 1405.103632 seconds.
-  path: Assets/Script/SensorScript2.cs
-  artifactKey: Guid(2a999c3cd47dbed40be67b89c31b97a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Script/SensorScript2.cs using Guid(2a999c3cd47dbed40be67b89c31b97a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5c1f06920c060f42f79755142560c0f0') in 0.051296 seconds 
+  Time since last request: 14575.787213 seconds.
+  path: Assets/Blender/New Animator Controller.controller
+  artifactKey: Guid(328463a8829e38344bb4d1a6ebf48d3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/New Animator Controller.controller using Guid(328463a8829e38344bb4d1a6ebf48d3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0410ec74b0d77f1278c9fd1b21859027') in 0.036010 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 276.908497 seconds.
-  path: Assets/Script/SensorScript2.cs
-  artifactKey: Guid(2a999c3cd47dbed40be67b89c31b97a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Script/SensorScript2.cs using Guid(2a999c3cd47dbed40be67b89c31b97a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14940664ae69d5fe5662306b52949247') in 0.004970 seconds 
+  Time since last request: 17.029577 seconds.
+  path: Assets/Blender/CrossBow.controller
+  artifactKey: Guid(328463a8829e38344bb4d1a6ebf48d3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/CrossBow.controller using Guid(328463a8829e38344bb4d1a6ebf48d3e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a0b5cdc1b2cf46b19dbf21bae3840f52') in 0.001680 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 66.699626 seconds.
-  path: Assets/Script/SensorScript2.cs
-  artifactKey: Guid(2a999c3cd47dbed40be67b89c31b97a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Script/SensorScript2.cs using Guid(2a999c3cd47dbed40be67b89c31b97a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7ee72f9f814ed05ba275d2a6acc1ef1') in 0.002410 seconds 
+  Time since last request: 566.287215 seconds.
+  path: Assets/Readme.asset
+  artifactKey: Guid(8105016687592461f977c054a80ce2f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Readme.asset using Guid(8105016687592461f977c054a80ce2f2) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e12faad8d38bcc81ada4ad8008a11d4') in 0.008180 seconds 
 ========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.008124 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\rokku\Dropbox\PC\Documents\GitHub\NishiProject2\TowerDefense\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Symbol file LoadedFromMemory doesn't match image C:\Users\rokku\Dropbox\PC\Documents\GitHub\NishiProject2\TowerDefense\Library\PackageCache\com.unity.visualscripting@1.7.8\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 2.07 ms, found 8 plugins.
-Preloading 1 native plugins for Editor in 0.07 ms.
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Cannot connect to Unity Package Manager local server
-[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
-[Package Manager] Cannot connect to Unity Package Manager local server
-Mono: successfully reloaded assembly
-- Completed reload, in  1.423 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1423ms)
-		BeginReloadAssembly (208ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (50ms)
-		EndReloadAssembly (1118ms)
-			LoadAssemblies (200ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (285ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (45ms)
-			SetupLoadedEditorAssemblies (577ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (21ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (99ms)
-				ProcessInitializeOnLoadAttributes (357ms)
-				ProcessInitializeOnLoadMethodAttributes (91ms)
-				AfterProcessingInitializeOnLoad (5ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (9ms)
-Platform modules already initialized, skipping
+Received Import Request.
+  Time since last request: 605.100001 seconds.
+  path: Assets/Blender/New Animator Controller.controller
+  artifactKey: Guid(341ed75d32b80bf469d7374c1be684d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/New Animator Controller.controller using Guid(341ed75d32b80bf469d7374c1be684d1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dea5fd6aea7b9fd10048ac04915a03c') in 0.002037 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 18.332621 seconds.
+  path: Assets/Blender/CrossBow_Shot.anim
+  artifactKey: Guid(ba02e9ddcc1f0bc4fbce57232e00dba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/CrossBow_Shot.anim using Guid(ba02e9ddcc1f0bc4fbce57232e00dba5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9033cc0605000d82022a49ea98d748d2') in 0.008663 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 58.469227 seconds.
+  path: Assets/Blender/Armature_shot.anim
+  artifactKey: Guid(b3d1814c69596e84c9f445d8d26a2ff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Blender/Armature_shot.anim using Guid(b3d1814c69596e84c9f445d8d26a2ff9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2301886aa2d56835a558abd61477d259') in 0.004762 seconds 
