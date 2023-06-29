@@ -51,15 +51,32 @@ public class ShotScript1 : MonoBehaviour
         {
             return;
         }
-
-        //アニメーションを持つ防衛施設とそうでない防衛施設で条件分岐
-        if(animator != null)
+        
+        //clsestEnemyが存在するかつ、canShotの値が変更前後で異なる場合変更
+        if(canShot != (sensorScript.closestEnemy != null))
         {
-
+            canShot = (sensorScript.closestEnemy != null);
+            if(canShot)
+            {
+                timer = 0.0f;
+            }
         }
-        else
+
+        if (canShot)
         {
-            Update_haveAnim();
+            timer += Time.deltaTime;
+            if(timer > shotInterval)
+            {
+                //アニメーションを持つ防衛施設とそうでない防衛施設で条件分岐
+                if (animator != null)
+                {
+
+                }
+                else
+                {
+                    Update_haveAnim();
+                }
+            }
         }
     }
 
