@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ShotScript : MonoBehaviour
 {
+    /*
     private AudioSource audioSource;
     [SerializeField] private bool haveAnimation;
     private Animator animator;
@@ -63,5 +64,6 @@ public class ShotScript : MonoBehaviour
         bulletObject.GetComponent<Rigidbody>().AddForce(shotDistance * shotSpeed, ForceMode.Impulse);
         Destroy(bulletObject, 10.0f);
     }
+    */
 
 }

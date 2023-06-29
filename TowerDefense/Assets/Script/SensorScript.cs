@@ -31,9 +31,6 @@ public class SensorScript : MonoBehaviour
     //visibleEnemiesリスト内で最も距離が近い敵オブジェクトを入れる変数
     public GameObject closestEnemy;
 
-    //球が打てるかどうか
-    public bool canShot = false;
-
     private void Start()
     {
         //防衛施設の初期位置、正面を保存する
@@ -101,6 +98,11 @@ public class SensorScript : MonoBehaviour
         else if(ctrlBone.transform.position != defaultPos)
         {
             ctrlBone.transform.position = Vector3.Lerp(ctrlBone.transform.position, defaultPos, 0.1f);
+            if(closestEnemy != null)
+            {
+                closestEnemy = null;
+            }
+        
         }
 
         //防衛施設の感知範囲外に出た敵をVisibleEnemiesから削除し、感知範囲内に残っている敵のみを残す

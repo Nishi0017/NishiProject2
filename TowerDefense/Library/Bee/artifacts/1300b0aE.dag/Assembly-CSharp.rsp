@@ -552,6 +552,7 @@
 "Assets/Script/EnemyHpScript.cs"
 "Assets/Script/GenerateEnemyScript.cs"
 "Assets/Script/RayShotScript.cs"
+"Assets/Script/RayShotScript2.cs"
 "Assets/Script/SensorScript.cs"
 "Assets/Script/ShotScript.cs"
 "Assets/Script/ShotScript2.cs"

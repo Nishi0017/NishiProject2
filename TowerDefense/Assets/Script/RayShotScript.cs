@@ -25,10 +25,12 @@ public class RayShotScript : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (!sensorScript.canShot)
         {
             return;
         }
+        */
 
         Ray ray = new Ray(gunpoint.position, gunpoint.forward);
         RaycastHit hit;

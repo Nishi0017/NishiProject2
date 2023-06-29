@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
-public class ShotScript1 : MonoBehaviour
+public class ShotScript3 : MonoBehaviour
 {
     //サウンド関係
     private AudioSource audioSource;
@@ -16,13 +16,13 @@ public class ShotScript1 : MonoBehaviour
 
     //発射関係
     [SerializeField] private SensorScript sensorScript;
-    public bool canShot = false;
+    private bool canShot = false;
     [SerializeField] private GameObject bulletPrefab; //弾のプレハブ
     [SerializeField] private Transform ctrlBone; //発射方向計算用
     [SerializeField] private Transform bulletSpawnPoint; //弾が出てくる位置
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float shotInterval;
-    [SerializeField] private float bulletDamage;
+    [SerializeField] private int bulletDamage;
 
 
     private float timer = 0.0f;
@@ -56,45 +56,62 @@ public class ShotScript1 : MonoBehaviour
         if(canShot != (sensorScript.closestEnemy != null))
         {
             canShot = (sensorScript.closestEnemy != null);
+
+            //アニメーションの再生、停止をcanShotに合わせる
+            if(animator != null)
+            {
+                if (animator.GetBool("CanShot") != canShot)
+                {
+                    animator.SetBool("CanShot", canShot);
+                }
+            }
+
+            //timerのリセット
             if(canShot)
             {
                 timer = 0.0f;
             }
         }
 
-        if (canShot)
+        if(!canShot) 
         {
-            timer += Time.deltaTime;
-            if(timer > shotInterval)
-            {
-                //アニメーションを持つ防衛施設とそうでない防衛施設で条件分岐
-                if (animator != null)
-                {
-
-                }
-                else
-                {
-                    Update_haveAnim();
-                }
-            }
+            return;
         }
+
+        //弾を打つ処理
+        timer += Time.deltaTime;
+        if (timer > shotInterval)
+        {
+            Shot((ctrlBone.position - bulletSpawnPoint.transform.position).normalized);
+
+            timer = 0.0f;
+        }
+
     }
 
-    private void Update_haveAnim()
-    {
-
-    }
-
+    /// <summary>
+    /// 弾をshotDistanceの方向に打つ
+    /// </summary>
+    /// <param name="shotDistance"></param>
     private void Shot(Vector3 shotDistance)
     {
+        audioSource.PlayOneShot(shotSound);
+        shotDistance.y = 0.0f;
+        GameObject bulletObject = Instantiate
+            (
+                bulletPrefab, 
+                bulletSpawnPoint.position, 
+                Quaternion.LookRotation((ctrlBone.position - bulletSpawnPoint.position).normalized)
+            );
+        bulletObject.GetComponent<Rigidbody>().AddForce(shotDistance * bulletSpeed, ForceMode.Impulse);
+        Destroy (bulletObject, 10.0f);
 
     }
 
-    void ChangeAnimState()
-    {
-        animator.SetBool("CanShot", canShot);
-    }
-
+    /// <summary>
+    /// 初期条件があっているかの確認処理
+    /// </summary>
+    /// <returns></returns>
     bool CheckInitialConditions()
     {
         if(sensorScript == null || bulletPrefab == null || bulletSpawnPoint == null)
