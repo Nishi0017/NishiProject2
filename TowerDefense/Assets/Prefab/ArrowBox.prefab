@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 816463549275194854}
   - component: {fileID: 90195652056343364}
   - component: {fileID: 7409231417539795103}
+  - component: {fileID: 594483003664636893}
   m_Layer: 0
   m_Name: ArrowBox
-  m_TagString: Untagged
+  m_TagString: AllyAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,6 +65,19 @@ CapsuleCollider:
   m_Height: 2.3168957
   m_Direction: 1
   m_Center: {x: 0.0001842854, y: 0.0072269686, z: 0.053234562}
+--- !u!114 &594483003664636893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7597566541020551854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4842193fea8f604ababd8f50075ee83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
 --- !u!1 &7819811812442286525
 GameObject:
   m_ObjectHideFlags: 0
