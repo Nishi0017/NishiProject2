@@ -476,7 +476,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5058847473775353565}
-  m_LocalRotation: {x: 0.7071068, y: 0.00000013240823, z: -0.00000013240823, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -796,7 +796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotSound: {fileID: 8300000, guid: d52b78246591cb442ac9682b1936326b, type: 3}
-  AnimSpeed: 1
+  AnimSpeed: 0.5
   sensorScript: {fileID: 2344623692547789316}
   canShot: 0
   bulletPrefab: {fileID: 7597566541020551854, guid: 44c3d94df6e30514e9d987e4c6528579,
@@ -804,8 +804,8 @@ MonoBehaviour:
   ctrlBone: {fileID: 7018477966002599341}
   bulletSpawnPoint: {fileID: 6827675171470494284}
   bulletSpeed: 15
-  shotInterval: 0.5
-  bulletDamage: 0
+  shotInterval: 3
+  bulletDamage: 30
 --- !u!1 &8024591555736588344
 GameObject:
   m_ObjectHideFlags: 0

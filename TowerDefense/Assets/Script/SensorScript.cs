@@ -26,7 +26,7 @@ public class SensorScript : MonoBehaviour
     [SerializeField] private GameObject ctrlBone;
 
     //感知範囲内にいる敵を入れるリスト
-    [SerializeField] private List<GameObject> visibleEnemies = new List<GameObject>();
+    private List<GameObject> visibleEnemies = new List<GameObject>();
 
     //visibleEnemiesリスト内で最も距離が近い敵オブジェクトを入れる変数
     public GameObject closestEnemy;
@@ -47,7 +47,7 @@ public class SensorScript : MonoBehaviour
         //「transform.position」を中心、「searchRadius」を半径とする球体の内部や
         //触れたすべての「Enemies」マスクを持つコライダーを
         //防衛施設の感知範囲(角度は含まない)にあるオブジェクトを入れる配列にいれる
-        Collider[] objectsInCollider = Physics.OverlapSphere(transform.position, searchRadius, LayerMask.GetMask("Enemies"));
+        Collider[] objectsInCollider = Physics.OverlapSphere(transform.position, searchRadius, LayerMask.GetMask("EnemyLayer"));
 
 
         
@@ -136,7 +136,6 @@ public class SensorScript : MonoBehaviour
         RaycastHit hit;
         if (Physics.Linecast(transform.position, target.position, out hit, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
-            Debug.Log(hit.collider.gameObject.name);
             if (hit.collider.gameObject.CompareTag("Wall"))
             {
                 return true;
