@@ -111,6 +111,7 @@ public class ShotScript3 : MonoBehaviour
                 Quaternion.LookRotation((ctrlBone.position - bulletSpawnPoint.position).normalized)
             );
         bulletObject.GetComponent<Rigidbody>().AddForce(shotDistance * bulletSpeed, ForceMode.Impulse);
+        bulletObject.GetComponent<BulletScript>().inputDamageAmount(bulletDamage);
         Destroy (bulletObject, 10.0f);
 
     }

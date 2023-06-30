@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - goal
   - Wall
+  - AllyAttack
+  - DefenceFacility
   layers:
   - Default
   - TransparentFX

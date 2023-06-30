@@ -26,7 +26,7 @@ public class SensorScript : MonoBehaviour
     [SerializeField] private GameObject ctrlBone;
 
     //感知範囲内にいる敵を入れるリスト
-    private List<GameObject> visibleEnemies = new List<GameObject>();
+    [SerializeField] private List<GameObject> visibleEnemies = new List<GameObject>();
 
     //visibleEnemiesリスト内で最も距離が近い敵オブジェクトを入れる変数
     public GameObject closestEnemy;
@@ -67,6 +67,7 @@ public class SensorScript : MonoBehaviour
                 }
             }
         }
+        visibleEnemies.RemoveAll(enemy => enemy == null);
 
         if (visibleEnemies.Count != 0)
         {
@@ -133,8 +134,9 @@ public class SensorScript : MonoBehaviour
     bool IsOtherObjectBetween(Transform target)
     {
         RaycastHit hit;
-        if (Physics.Linecast(transform.position, target.position, out hit))
+        if (Physics.Linecast(transform.position, target.position, out hit, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
+            Debug.Log(hit.collider.gameObject.name);
             if (hit.collider.gameObject.CompareTag("Wall"))
             {
                 return true;
