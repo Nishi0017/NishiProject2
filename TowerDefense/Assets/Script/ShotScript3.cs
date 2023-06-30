@@ -16,13 +16,16 @@ public class ShotScript3 : MonoBehaviour
 
     //発射関係
     [SerializeField] private SensorScript sensorScript;
-    private bool canShot = false;
+    [SerializeField] private bool canShot = false;
     [SerializeField] private GameObject bulletPrefab; //弾のプレハブ
     [SerializeField] private Transform ctrlBone; //発射方向計算用
     [SerializeField] private Transform bulletSpawnPoint; //弾が出てくる位置
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float shotInterval;
     [SerializeField] private int bulletDamage;
+
+    //位置変更を判断するための関数
+    Vector3 lastPos;
 
 
     private float timer = 0.0f;
@@ -36,6 +39,8 @@ public class ShotScript3 : MonoBehaviour
             animator.speed = AnimSpeed;
             animator.SetBool("CanShot", false);
         }
+    
+        lastPos = transform.position;
     }
 
     private void Update()
@@ -46,10 +51,10 @@ public class ShotScript3 : MonoBehaviour
             return;
         }
 
-        //防衛施設の感知範囲内に敵がいない場合何もしない処理
-        if(sensorScript.closestEnemy == null)
+        if(lastPos != transform.position)
         {
-            return;
+            sensorScript.ResetCtrlPos();
+            lastPos = transform.position;
         }
         
         //clsestEnemyが存在するかつ、canShotの値が変更前後で異なる場合変更
@@ -71,6 +76,8 @@ public class ShotScript3 : MonoBehaviour
             {
                 timer = 0.0f;
             }
+
+            return;
         }
 
         if(!canShot) 

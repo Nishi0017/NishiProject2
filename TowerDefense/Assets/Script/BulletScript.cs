@@ -7,11 +7,13 @@ public class BulletScript : MonoBehaviour
     [SerializeField] private int damage = 10;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Enemy")
-        { 
-            other.gameObject.GetComponent<EnemyHpScript>().Damage(damage);
+        if (other.gameObject.CompareTag != "Ally")
+        {
+            if (other.gameObject.tag == "Enemy")
+            {
+                other.gameObject.GetComponent<EnemyHpScript>().Damage(damage);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
-        
     }
 }

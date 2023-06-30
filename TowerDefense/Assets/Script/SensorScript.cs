@@ -143,5 +143,13 @@ public class SensorScript : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// 防衛施設の初期位置、正面を保存する
+    /// </summary>
+    public void ResetCtrlPos()
+    {
+        defaultPos = ctrlBone.transform.position;
+        defaultForward = ctrlBone.transform.forward;
+    }
 
 }
