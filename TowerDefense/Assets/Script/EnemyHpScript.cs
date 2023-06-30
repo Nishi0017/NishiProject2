@@ -27,4 +27,14 @@ public class EnemyHpScript : MonoBehaviour
         }
         slider.value = (float)currentHp / (float)maxHp;
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("AllyAttack"))
+        {
+            Damage(other.gameObject.GetComponent<BulletScript>().damage);
+            Destroy(other.gameObject);
+        }
+    }
+
 }

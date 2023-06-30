@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField] private int damage = 10;
+    public int damage = 0;
+
+    public void inputDamageAmount(int _damage)
+    {
+        damage = _damage;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag != "Ally")
+        if(other.gameObject.CompareTag("Wall"))
         {
-            if (other.gameObject.tag == "Enemy")
-            {
-                other.gameObject.GetComponent<EnemyHpScript>().Damage(damage);
-            }
             Destroy(gameObject);
         }
     }
