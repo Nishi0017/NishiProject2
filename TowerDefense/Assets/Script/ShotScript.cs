@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.ShaderKeywordFilter;
@@ -6,25 +6,25 @@ using UnityEngine;
 
 public class ShotScript : MonoBehaviour
 {
-    //ƒTƒEƒ“ƒhŠÖŒW
+    //ã‚µã‚¦ãƒ³ãƒ‰é–¢ä¿‚
     private AudioSource audioSource;
-    [SerializeField] private AudioClip shotSound;
+    [SerializeField] private AudioClip shotSound; //ç™ºå°„æ™‚ã®éŸ³
     
-    //ƒAƒjƒ[ƒVƒ‡ƒ“ŠÖŒW
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–¢ä¿‚
     private Animator animator;
-    [SerializeField] private float AnimSpeed = 1.0f;
+    [SerializeField] private float AnimSpeed = 1.0f; //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é€Ÿåº¦
 
-    //”­ËŠÖŒW
+    //ç™ºå°„é–¢ä¿‚
     [SerializeField] private SensorScript sensorScript;
     [SerializeField] private bool canShot = false;
-    [SerializeField] private GameObject bulletPrefab; //’e‚ÌƒvƒŒƒnƒu
-    [SerializeField] private Transform ctrlBone; //”­Ë•ûŒüŒvZ—p
-    [SerializeField] private Transform bulletSpawnPoint; //’e‚ªo‚Ä‚­‚éˆÊ’u
-    [SerializeField] private float bulletSpeed;
-    [SerializeField] private float shotInterval;
-    [SerializeField] private int bulletDamage;
+    [SerializeField] private GameObject bulletPrefab; //å¼¾ã®ãƒ—ãƒ¬ãƒãƒ–
+    [SerializeField] private Transform ctrlBone; //ç™ºå°„æ–¹å‘è¨ˆç®—ç”¨
+    [SerializeField] private Transform bulletSpawnPoint; //å¼¾ãŒå‡ºã¦ãã‚‹ä½ç½®
+    [SerializeField] private float bulletSpeed; //å¼¾é€Ÿåº¦
+    [SerializeField] private float shotInterval; //ç™ºå°„æ„Ÿè¦š
+    [SerializeField] private int bulletDamage; //ãƒ€ãƒ¡ãƒ¼ã‚¸é‡
 
-    //ˆÊ’u•ÏX‚ğ”»’f‚·‚é‚½‚ß‚ÌŠÖ”
+    //ä½ç½®å¤‰æ›´ã‚’åˆ¤æ–­ã™ã‚‹ãŸã‚ã®é–¢æ•°
     Vector3 lastPos;
 
 
@@ -33,36 +33,39 @@ public class ShotScript : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒã‚ã‚‹ã‹ã®æ¡ä»¶åˆ†å²
         animator = GetComponent<Animator>();
         if (animator != null)
         {
             animator.speed = AnimSpeed;
             animator.SetBool("CanShot", false);
         }
-    
+
         lastPos = transform.position;
     }
 
     private void Update()
     {
-        //ƒAƒ^ƒbƒ`•s‘«‚É‚æ‚éƒGƒ‰[‰ñ”ğ
+        //ã‚¢ã‚¿ãƒƒãƒä¸è¶³ã«ã‚ˆã‚‹ã‚¨ãƒ©ãƒ¼å›é¿
         if (!CheckInitialConditions())
         {
             return;
         }
 
+        //ctrlBoneã®åˆæœŸè¡Œãæ›´æ–°
         if(lastPos != transform.position)
         {
             sensorScript.ResetCtrlPos();
             lastPos = transform.position;
         }
         
-        //clsestEnemy‚ª‘¶İ‚·‚é‚©‚ÂAcanShot‚Ì’l‚ª•ÏX‘OŒã‚ÅˆÙ‚È‚éê‡•ÏX
+        //clsestEnemyãŒå­˜åœ¨ã™ã‚‹ã‹ã¤ã€canShotã®å€¤ãŒå¤‰æ›´å‰å¾Œã§ç•°ãªã‚‹å ´åˆå¤‰æ›´
         if(canShot != (sensorScript.closestEnemy != null))
         {
             canShot = (sensorScript.closestEnemy != null);
 
-            //ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶A’â~‚ğcanShot‚É‡‚í‚¹‚é
+            //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿã€åœæ­¢ã‚’canShotã«åˆã‚ã›ã‚‹
             if(animator != null)
             {
                 if (animator.GetBool("CanShot") != canShot)
@@ -71,7 +74,7 @@ public class ShotScript : MonoBehaviour
                 }
             }
 
-            //timer‚ÌƒŠƒZƒbƒg
+            //timerã®ãƒªã‚»ãƒƒãƒˆ
             if(canShot)
             {
                 timer = 0.0f;
@@ -85,7 +88,7 @@ public class ShotScript : MonoBehaviour
             return;
         }
 
-        //’e‚ğ‘Å‚Âˆ—
+        //å¼¾ã‚’æ‰“ã¤å‡¦ç†
         timer += Time.deltaTime;
         if (timer > shotInterval)
         {
@@ -96,7 +99,7 @@ public class ShotScript : MonoBehaviour
     }
 
     /// <summary>
-    /// ’e‚ğshotDistance‚Ì•ûŒü‚É‘Å‚Â
+    /// å¼¾ã‚’shotDistanceã®æ–¹å‘ã«æ‰“ã¤
     /// </summary>
     /// <param name="shotDistance"></param>
     private void Shot(Vector3 shotDistance)
@@ -116,7 +119,7 @@ public class ShotScript : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰ŠúğŒ‚ª‚ ‚Á‚Ä‚¢‚é‚©‚ÌŠm”Fˆ—
+    /// åˆæœŸæ¡ä»¶ãŒã‚ã£ã¦ã„ã‚‹ã‹ã®ç¢ºèªå‡¦ç†
     /// </summary>
     /// <returns></returns>
     bool CheckInitialConditions()

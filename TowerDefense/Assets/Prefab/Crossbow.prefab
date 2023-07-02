@@ -795,7 +795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f18a93373f6be84f81a261602ebec92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotSound: {fileID: 8300000, guid: d52b78246591cb442ac9682b1936326b, type: 3}
+  shotSound: {fileID: 8300000, guid: d84967182546d074988071b549d27afb, type: 3}
   AnimSpeed: 0.5
   sensorScript: {fileID: 2344623692547789316}
   canShot: 0
