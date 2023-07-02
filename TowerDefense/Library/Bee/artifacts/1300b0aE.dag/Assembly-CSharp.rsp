@@ -553,6 +553,7 @@
 "Assets/Script/EnemyHpScript.cs"
 "Assets/Script/EnemySystemManager.cs"
 "Assets/Script/EnemyWaveManager.cs"
+"Assets/Script/GameManager.cs"
 "Assets/Script/GenerateEnemyScript.cs"
 "Assets/Script/RayShotScript.cs"
 "Assets/Script/SensorScript.cs"
