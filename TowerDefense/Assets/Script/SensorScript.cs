@@ -67,6 +67,7 @@ public class SensorScript : MonoBehaviour
                 }
             }
         }
+        //List内でnullになった要素を削除する
         visibleEnemies.RemoveAll(enemy => enemy == null);
 
         if (visibleEnemies.Count != 0)

@@ -551,11 +551,16 @@
 "Assets/Script/ControlLimitScript2.cs"
 "Assets/Script/DefenseSystemManager.cs"
 "Assets/Script/EnemyHpScript.cs"
+"Assets/Script/EnemySystemManager.cs"
+"Assets/Script/EnemyWaveManager.cs"
 "Assets/Script/GenerateEnemyScript.cs"
 "Assets/Script/RayShotScript.cs"
 "Assets/Script/SensorScript.cs"
 "Assets/Script/ShotScript.cs"
 "Assets/Script/Test_HumanScript.cs"
+"Assets/ScriptableObject/AllEnemiesDate.cs"
+"Assets/ScriptableObject/EnemyDate.cs"
+"Assets/ScriptableObject/EnemyGenerateDate.cs"
 "Assets/TutorialInfo/Scripts/Readme.cs"
 -langversion:9.0
 

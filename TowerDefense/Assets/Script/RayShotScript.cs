@@ -1,30 +1,31 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class RayShotScript : MonoBehaviour
 {
-    //ƒTƒEƒ“ƒhŠÖŒW
+    //ã‚µã‚¦ãƒ³ãƒ‰é–¢ä¿‚
     private AudioSource audioSource;
-    [SerializeField] private AudioClip shotSound;
+    [SerializeField] private AudioClip shotSound; //ç™ºå°„æ™‚ã®éŸ³
 
-    //ƒAƒjƒ[ƒVƒ‡ƒ“ŠÖŒW
+    //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é–¢ä¿‚
     private Animator animator;
-    [SerializeField] private float AnimSpeed = 1.0f;
+    [SerializeField] private float AnimSpeed = 1.0f;ã€€//ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³é€Ÿåº¦
 
-    //”­ËŠÖŒW
+    //ç™ºå°„é–¢ä¿‚
     [SerializeField] private SensorScript sensorScript;
     public bool canShot = false;
-    [SerializeField] private Transform raySpawnPoint;
-    private float maxRange;
+    [SerializeField] private Transform raySpawnPoint; //Rayã‚’ç™ºå°„ã—å§‹ã‚ã‚‹ä½ç½®
+    private float maxRange;ã€€//å°„ç¨‹ç¯„å›²
     [SerializeField] private float damageInterval;
     [SerializeField] private int rayDamage;
-
+    //RayãŒå½“ãŸã‚‰ãªã„Maskè¨­å®šç”¨
     private int defenseLayer;
     private int enemyLayer;
     private int layerMask;
 
+    //RayãŒå½“ãŸã£ãŸæ•µã®ä¿å­˜ç”¨
     private GameObject targetEnemy = null;
     EnemyHpScript enemyHpScript;
 
@@ -33,13 +34,18 @@ public class RayShotScript : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        
+        //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ãŒã‚ã‚‹ã‹ã©ã†ã‹ã®æ¡ä»¶åˆ†å²
         animator = GetComponent<Animator>();
         if (animator != null)
         {
             animator.speed = AnimSpeed;
             animator.SetBool("CanShot", false);
         }
+
         maxRange = sensorScript.searchRadius;
+
+        //RayãŒå½“ãŸã‚‰ãªã„ã‚ˆã†ã«ã™ã‚‹ãŸã‚ã®åˆæœŸè¨­å®š
         defenseLayer = LayerMask.NameToLayer("DefenseLayer");
         enemyLayer = LayerMask.NameToLayer("EnemyLayer");
         layerMask = ~(1 << defenseLayer);
@@ -47,24 +53,24 @@ public class RayShotScript : MonoBehaviour
 
     private void Update()
     {
-        //ƒAƒ^ƒbƒ`•s‘«‚É‚æ‚éƒGƒ‰[‰ñ”ğ
+        //ã‚¢ã‚¿ãƒƒãƒä¸è¶³ã«ã‚ˆã‚‹ã‚¨ãƒ©ãƒ¼å›é¿
         if (!CheckInitialConditions())
         {
             return;
         }
 
-        //–h‰q{İ‚ÌŠ´’m”ÍˆÍ“à‚É“G‚ª‚¢‚È‚¢ê‡‰½‚à‚µ‚È‚¢ˆ—
+        //é˜²è¡›æ–½è¨­ã®æ„ŸçŸ¥ç¯„å›²å†…ã«æ•µãŒã„ãªã„å ´åˆä½•ã‚‚ã—ãªã„å‡¦ç†
         if (sensorScript.closestEnemy == null)
         {
             return;
         }
 
-        //clsestEnemy‚ª‘¶İ‚·‚é‚©‚ÂAcanShot‚Ì’l‚ª•ÏX‘OŒã‚ÅˆÙ‚È‚éê‡•ÏX
+        //clsestEnemyãŒå­˜åœ¨ã™ã‚‹ã‹ã¤ã€canShotã®å€¤ãŒå¤‰æ›´å‰å¾Œã§ç•°ãªã‚‹å ´åˆå¤‰æ›´
         if (canShot != (sensorScript.closestEnemy != null))
         {
             canShot = (sensorScript.closestEnemy != null);
 
-            //ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌÄ¶A’â~‚ğcanShot‚É‡‚í‚¹‚é
+            //ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®å†ç”Ÿã€åœæ­¢ã‚’canShotã«åˆã‚ã›ã‚‹
             if (animator != null)
             {
                 if (animator.GetBool("CanShot") != canShot)
@@ -73,7 +79,7 @@ public class RayShotScript : MonoBehaviour
                 }
             }
 
-            //timer‚ÌƒŠƒZƒbƒg
+            //timerã®ãƒªã‚»ãƒƒãƒˆ
             if (canShot)
             {
                 timer = 0.0f;
@@ -86,26 +92,26 @@ public class RayShotScript : MonoBehaviour
         }
 
         timer += Time.deltaTime;
-        //Ray‚É‚æ‚éƒ_ƒ[ƒWˆ—
+        //Rayã«ã‚ˆã‚‹ãƒ€ãƒ¡ãƒ¼ã‚¸å‡¦ç†
         RaycastHit hit;
         if(Physics.Raycast(raySpawnPoint.position, raySpawnPoint.up, out hit, maxRange, layerMask))
         {
             if (hit.collider.gameObject.layer == enemyLayer)
             {
-                //shot‰¹‚ğ“G‚ÉRay‚ª“–‚½‚Á‚Ä‚¢‚é‚Æ‚«‚ÉüŠú“I‚É‚È‚ç‚·
+                //shotéŸ³ã‚’æ•µã«RayãŒå½“ãŸã£ã¦ã„ã‚‹ã¨ãã«å‘¨æœŸçš„ã«ãªã‚‰ã™
                 if (!audioSource.isPlaying)
                 {
                     audioSource.PlayOneShot(shotSound);
                 }
                 
-                //ƒ_ƒ[ƒW‚ğ—^‚¦‚é“G‚ÌXVˆ—
+                //ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹æ•µã®æ›´æ–°å‡¦ç†
                 if (hit.collider.gameObject != targetEnemy)
                 {
                     targetEnemy = hit.collider.gameObject;
                     enemyHpScript = hit.collider.gameObject.GetComponent<EnemyHpScript>();
                 }
 
-                //üŠú“I‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+                //å‘¨æœŸçš„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
                 if (timer > damageInterval && enemyHpScript != null)
                 {
                     enemyHpScript.Damage(rayDamage);
@@ -121,7 +127,7 @@ public class RayShotScript : MonoBehaviour
     }
 
     /// <summary>
-    /// ‰ŠúğŒ‚ª‚ ‚Á‚Ä‚¢‚é‚©‚ÌŠm”Fˆ—
+    /// åˆæœŸæ¡ä»¶ãŒã‚ã£ã¦ã„ã‚‹ã‹ã®ç¢ºèªå‡¦ç†
     /// </summary>
     /// <returns></returns>
     bool CheckInitialConditions()
