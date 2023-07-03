@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d148cfc80719b034182cf91ecf7a7955, type: 3}
+  m_Name: Human_Blue_EnemyDate
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6711064831541637378, guid: e5359bec608d6fa4a9c575c1d40c7925, type: 3}
+  enemyName: BlurChan
+  health: 200
+  attackPower: 10
+  defensePower: 10
+  speed: 3.5
+  reward: 10
+  experience: 10
