@@ -1,14 +1,14 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyDate", menuName = "ScriptableObject/Enemy Date")]
 public class EnemyDate : ScriptableObject
 {
-    public GameObject prefab; //“G‚ÌƒvƒŒƒnƒu
-    public string enemyName; //–¼‘O
-    public int health; //‘Ì—Í
-    public int attackPower; //UŒ‚—Í
-    public int defensePower; //–hŒä—Í
-    public float speed; //ƒXƒs[ƒh
-    public float reward; //•ñV(‚¨‹àA‘fŞH)
-    public float experience; //ŒoŒ±’l
+    public GameObject prefab; //æ•µã®ãƒ—ãƒ¬ãƒãƒ–
+    public string enemyName; //åå‰
+    public int health; //ä½“åŠ›
+    public int attackPower; //æ”»æ’ƒåŠ›
+    public int defensePower; //é˜²å¾¡åŠ›
+    public float speed; //ã‚¹ãƒ”ãƒ¼ãƒ‰
+    public float reward; //å ±é…¬(ãŠé‡‘ã€ç´ æï¼Ÿ)
+    public float experience; //çµŒé¨“å€¤
 }

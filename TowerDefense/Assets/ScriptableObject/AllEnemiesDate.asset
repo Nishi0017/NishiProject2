@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: AllEnemiesDate
   m_EditorClassIdentifier: 
   enemiesDate:
-  - {fileID: 11400000, guid: f363bd6b5dba99d4bb73801a98ec1a48, type: 2}
+  - {fileID: 11400000, guid: ae569c4c21b1dfb469d5ac9dced9d5b6, type: 2}
+  - {fileID: 11400000, guid: 20f28f47a39b62141afa5d0bb12db369, type: 2}

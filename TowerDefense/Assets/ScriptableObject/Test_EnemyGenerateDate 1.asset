@@ -12,5 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af3d61ebb0c46a49820cb8f9e17b6a6, type: 3}
   m_Name: Test_EnemyGenerateDate 1
   m_EditorClassIdentifier: 
-  enemySpawnOrder: 30003000300030003000
+  enemySpawnOrder:
+  - EnemyID: 0
+    level: 1
+  - EnemyID: 0
+    level: 1
+  - EnemyID: 0
+    level: 2
+  - EnemyID: 1
+    level: 2
+  - EnemyID: 1
+    level: 3
   spawnInterval: 3

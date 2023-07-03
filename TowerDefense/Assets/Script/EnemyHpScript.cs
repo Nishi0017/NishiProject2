@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class EnemyHpScript : MonoBehaviour
 {
-    [SerializeField] private int maxHp = 100;
-    private int currentHp;
+    private EnemyDate enemyDate;
+
+    private int currentHp = 0;
     [SerializeField] private Slider slider;
 
     [SerializeField] private int enemyDef = 0;
@@ -14,8 +15,10 @@ public class EnemyHpScript : MonoBehaviour
 
     private void Start()
     {
+        enemyDate = GetComponent<EnemyScript>().enemyDate;
+        currentHp = enemyDate.health;
+
         slider.value = 1;
-        currentHp = maxHp;
     }
 
     public void Damage(int _damage)
@@ -25,7 +28,7 @@ public class EnemyHpScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        slider.value = (float)currentHp / (float)maxHp;
+        slider.value = (float)currentHp / (float)enemyDate.health;
     }
 
     private void OnTriggerEnter(Collider other)

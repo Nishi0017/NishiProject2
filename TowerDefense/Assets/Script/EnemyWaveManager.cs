@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnemyWaveManager : MonoBehaviour
 {
+    public int defencePoint = 10; //突破してもよい敵の限界数
     [SerializeField] private List<GameObject> fieldEnemies = new List<GameObject>(); //フィールドにいる敵
     [SerializeField] private Transform spawnPos;
     [SerializeField] private Transform goalPos;
@@ -15,7 +16,7 @@ public class EnemyWaveManager : MonoBehaviour
     private EnemyGenerateDate currentEnemyGenerateDate; //現在のwaveの敵の出現種類、順番、出現間隔参照用
 
     //敵出現関係
-    char[] enemySpawnOrder = null; //現在のwaveの敵の出現種類、順番保存用
+    EnemySpawnOrder[] enemySpawnOrders = null; //現在のwaveの敵の出現種類、順番保存用
     int spawnOrderCount = 0; //現在、何番目の敵を出しているかの保存用
 
     //Wave関係
@@ -45,22 +46,23 @@ public class EnemyWaveManager : MonoBehaviour
     /// <param name="newState"></param>
     private void ChangeState(WaveState newState)
     {
-        Debug.Log(newState + "へ移行");
         currentState = newState;
         stateEnter = true;
         stateTime = 0.0f;
+        Debug.Log("現在のステート" + currentState);
     }
     
     private void Start()
     {
         currentState = WaveState.WaitingForStart;
+        Debug.Log("現在のステート" + currentState);
 
         maxWave = enemyGenerateDates.Length;
 
         //一番初めのwave情報の読み込み
         currentWave++;
         currentEnemyGenerateDate = enemyGenerateDates[0];
-        enemySpawnOrder = currentEnemyGenerateDate.enemySpawnOrder;
+        enemySpawnOrders = currentEnemyGenerateDate.enemySpawnOrder;
         spawnInterval = currentEnemyGenerateDate.spawnInterval;
     }
 
@@ -68,8 +70,10 @@ public class EnemyWaveManager : MonoBehaviour
     {
         stateTime += Time.deltaTime;
 
-
-        Debug.Log("現在のステート" + currentState);
+        if(defencePoint <= 0)
+        {
+            ChangeState(WaveState.GameOver);
+        }
 
         // ステートごとの振る舞い実装
         switch (currentState)
@@ -91,11 +95,11 @@ public class EnemyWaveManager : MonoBehaviour
                 break;
 
             case WaveState.GameClear:
-                //ゲームマネージャーにクリアフラグを渡す予定
+                GameManager.instance.GameCrear(); //ゲームクリアのフラグを立てる
                 break;
             
             case WaveState.GameOver:
-                //ゲームマネージャーにゲームオーバーフラグを渡す予定
+                GameManager.instance.GameOver(); //ゲームオーバーのフラグを立てる
                 break;
 
         }
@@ -136,7 +140,7 @@ public class EnemyWaveManager : MonoBehaviour
         //ステート移行の際に一回だけ実行
         if (stateEnter)
         {
-
+            spawnOrderCount = 0;
         }
 
         int spawnOrderNum = currentEnemyGenerateDate.enemySpawnOrder.Length; //スポーンする敵の数取得
@@ -148,8 +152,13 @@ public class EnemyWaveManager : MonoBehaviour
             //一定間隔で敵を出現させる
             if (stateTime > spawnInterval)
             {
+                //出現させる敵プレハブ、レベル
+                EnemySpawnOrder enemySpawnOrder = enemySpawnOrders[spawnOrderCount];
+                GameObject spawnEnemy = allEnemiesDate.enemiesDate[enemySpawnOrder.EnemyID].prefab;
+                int level = enemySpawnOrder.level;
+                
+                SpawnEnemy(spawnEnemy, level);
 
-                SpawnEnemy(allEnemiesDate.enemiesDate[(int)enemySpawnOrder[spawnOrderCount] - 48].prefab);
                 spawnOrderCount++;
                 stateTime = 0.0f;
             }
@@ -202,7 +211,7 @@ public class EnemyWaveManager : MonoBehaviour
             //次のWave情報の取得
             currentWave++;
             currentEnemyGenerateDate = enemyGenerateDates[currentWave - 1];
-            enemySpawnOrder = currentEnemyGenerateDate.enemySpawnOrder;
+            enemySpawnOrders = currentEnemyGenerateDate.enemySpawnOrder;
             spawnInterval = currentEnemyGenerateDate.spawnInterval;
 
             
@@ -217,15 +226,15 @@ public class EnemyWaveManager : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy(GameObject spawnEnemy)
+    private void SpawnEnemy(GameObject _spawnEnemy, int _level)
     {
-        if (spawnEnemy == null)
+        if (_spawnEnemy == null)
         {
             return;
         }
 
-        GameObject enemy = Instantiate(spawnEnemy, spawnPos.position, Quaternion.identity);
-        enemy.GetComponent<Test_HumanScript>().goalPosition = goalPos;
+        GameObject enemy = Instantiate(_spawnEnemy, spawnPos.position, Quaternion.identity);
+        enemy.GetComponent<EnemyScript>().InputEnemyInformation(goalPos, _level);
         fieldEnemies.Add(enemy);
     }
 }
