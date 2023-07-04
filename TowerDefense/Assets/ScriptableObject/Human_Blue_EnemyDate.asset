@@ -17,6 +17,6 @@ MonoBehaviour:
   health: 200
   attackPower: 10
   defensePower: 10
-  speed: 3.5
+  speed: 10
   reward: 10
   experience: 10

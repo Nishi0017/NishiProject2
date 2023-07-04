@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public void GameCrear()
     {
         isGameCleared = true;
