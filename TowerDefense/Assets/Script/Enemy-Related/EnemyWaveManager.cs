@@ -7,7 +7,7 @@ public class EnemyWaveManager : MonoBehaviour
 {
     [SerializeField] private UISystemManager uISytemManager;
     public int defencePoint = 10; //突破してもよい敵の限界数
-    [SerializeField] private List<GameObject> fieldEnemies = new List<GameObject>(); //フィールドにいる敵
+    private List<GameObject> fieldEnemies = new List<GameObject>(); //フィールドにいる敵
     [SerializeField] private Transform spawnPos;
     [SerializeField] private Transform goalPos;
 
@@ -65,13 +65,17 @@ public class EnemyWaveManager : MonoBehaviour
         currentEnemyGenerateDate = enemyGenerateDates[0];
         enemySpawnOrders = currentEnemyGenerateDate.enemySpawnOrder;
         spawnInterval = currentEnemyGenerateDate.spawnInterval;
+       
+        //UI情報の入力
+        uISytemManager.InputEnemyTotal(currentEnemyGenerateDate.enemySpawnOrder.Length);
+        uISytemManager.InputDefencePoint(defencePoint);
     }
 
     private void Update()
     {
         stateTime += Time.deltaTime;
 
-        if(defencePoint <= 0)
+        if (defencePoint <= 0 && currentState != WaveState.GameOver)
         {
             ChangeState(WaveState.GameOver);
         }
@@ -121,12 +125,6 @@ public class EnemyWaveManager : MonoBehaviour
     /// </summary>
     private void UpdateWaitngForStartState()
     {
-        //ステート移行の際に一回だけ実行
-        if (stateEnter)
-        {
-            uISytemManager.InputDefencePoint(defencePoint);
-        }
-
         if (Input.GetKeyUp(KeyCode.S))
         {
             ChangeState(WaveState.SpawnWave);
@@ -184,7 +182,6 @@ public class EnemyWaveManager : MonoBehaviour
         
         fieldEnemies.RemoveAll(enemy => enemy == null); //List内でnullになった要素を削除する
 
-        Debug.Log("現在のwave" + currentWave);
         if(currentWave != maxWave)
         {
             if(fieldEnemies.Count == 0 || stateTime > waveDuration)
@@ -237,5 +234,19 @@ public class EnemyWaveManager : MonoBehaviour
         GameObject enemy = Instantiate(_spawnEnemy, spawnPos.position, Quaternion.identity);
         enemy.GetComponent<EnemyScript>().InputEnemyInformation(goalPos, _level);
         fieldEnemies.Add(enemy);
+    }
+
+
+    /// <summary>
+    /// 敵がステージを突破した際の処理
+    /// </summary>
+    public void PassedEnemy()
+    {
+        defencePoint = defencePoint < 1 ? 0 :  defencePoint - 1;
+        uISytemManager.InputDefencePoint(defencePoint);
+        if(defencePoint < 1)
+        {
+            ChangeState(WaveState.GameOver);
+        }
     }
 }

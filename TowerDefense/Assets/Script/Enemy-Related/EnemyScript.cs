@@ -34,7 +34,7 @@ public class EnemyScript : MonoBehaviour
 
     private void OnDestroy()
     {
-        //UISystemManager uISystemManager = FindWithTag("UISystemManager").GetComponent<UISystemManager>();
-        //uISystemManager.UpdateEnemyTotal();
+        UISystemManager uISystemManager = GameObject.FindWithTag("UISystemManager").GetComponent<UISystemManager>();
+        uISystemManager.UpdateEnemyTotal();
     }
 }
