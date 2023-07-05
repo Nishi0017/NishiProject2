@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,7 @@ public class GameManager : MonoBehaviour
     private bool isGameCleared = false; //ゲームクリア判定
     private bool isGameOvered = false; //ゲームオーバー判定
 
-    private int money = 0; //お金
+    private int haveMoney = 0; //お金
     private int score = 0; //スコア
 
 
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     public bool IsPlaying { get { return isPlaying; } }
     public bool IsGameCleared { get { return isGameCleared; } }
     public bool IsGameOvered { get {  return isGameOvered; } }
-    public int Money { get {  return money; } }
+    public int HaveMoney { get {  return haveMoney; } }
     public int Score { get { return score; } }
 
 
@@ -46,5 +47,15 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         isGameOvered = true;
+    }
+
+    public void GetMoney(int _getMoney)
+    {
+        haveMoney += _getMoney;
+    }
+
+    public void UseMoney(int _useMoney)
+    {
+        haveMoney -= _useMoney;
     }
 }

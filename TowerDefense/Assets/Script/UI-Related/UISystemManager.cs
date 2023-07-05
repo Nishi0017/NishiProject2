@@ -1,19 +1,34 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using static EnemyWaveManager; //WaveState‚Ì•ÏX‚É•K—v
-using System.Security;
 
 public class UISystemManager : MonoBehaviour
 {
-    [SerializeField] private EnemyWaveManager enemyWaveManager; //ƒQ[ƒ€ƒI[ƒo[‚ÌWaveState•ÏX—p
+    [SerializeField] private EnemyWaveManager enemyWaveManager; //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼æ™‚ã®WaveStateå¤‰æ›´ç”¨
 
     [SerializeField] private TextMeshProUGUI enemyTotalText = null;
-    private int enemyTotal; //‚ ‚éWave‚Åo‚é“G‚Ì‘”
+    private int enemyTotal; //ã‚ã‚‹Waveã§å‡ºã‚‹æ•µã®ç·æ•°
 
     [SerializeField] private TextMeshProUGUI defencePointText = null;
-    private int defencePoint; //ƒfƒtƒFƒ“ƒX‰Â”\‚È“G‚Ì”
+    private int defencePoint; //ãƒ‡ãƒ•ã‚§ãƒ³ã‚¹å¯èƒ½ãªæ•µã®æ•°
+
+    [SerializeField] private TextMeshProUGUI haveMoneyText = null;
+    private int haveMoney;
+
+    private void Start()
+    {
+        haveMoney = GameManager.Instance.HaveMoney;
+    }
+
+    private void Update()
+    {
+        if (haveMoney != GameManager.Instance.HaveMoney)
+        {
+            haveMoney = GameManager.Instance.HaveMoney;
+            ChangeDefencePointText();
+        }
+    }
 
     public void InputEnemyTotal(int _enemyTotal)
     {
@@ -36,11 +51,16 @@ public class UISystemManager : MonoBehaviour
 
     private void ChangeEnemyTotalTextt()
     {
-        enemyTotalText.SetText(enemyTotal.ToString());
+        enemyTotalText.SetText("æ®‹ã‚Šã®æ•µï¼š" + enemyTotal.ToString());
     }
 
     private void ChangeDefencePointText()
     {
-        defencePointText.SetText(defencePoint.ToString());
+        defencePointText.SetText("ä½“åŠ›ï¼š" + defencePoint.ToString());
+    }
+
+    private void ChangeHaveMoneyText()
+    {
+        haveMoneyText.SetText("ãŠé‡‘ï¼š" + haveMoney.ToString() + "ãƒãƒãƒ¼");
     }
 }
