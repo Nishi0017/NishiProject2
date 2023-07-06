@@ -324,7 +324,7 @@
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.16f1/Editor/Data/PlaybackEngines/AndroidPlayer/Unity.Android.Types.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.16f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2021.3.16f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll"
--r:"C:/Users/rokku/Dropbox/PC/Documents/GitHub/NishiProject2/TowerDefense/Library/PackageCache/com.unity.burst@1.8.2/Unity.Burst.Unsafe.dll"
+-r:"C:/Users/kumax/Documents/GitHub/NishiProject2/TowerDefense/Library/PackageCache/com.unity.burst@1.8.2/Unity.Burst.Unsafe.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1300b0aE.dag/UnityEngine.UI.ref.dll"
 "Library/PackageCache/com.unity.burst@1.8.2/Runtime/BurstCompileAttribute.cs"

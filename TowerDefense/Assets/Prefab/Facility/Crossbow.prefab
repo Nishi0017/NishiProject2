@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5091760875290256055}
   - component: {fileID: 504548040113299975}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6827675171470494284}
   - component: {fileID: 7310658323643714648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5032314042719184250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BaseBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2812511875355178976}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Con.GunpointBone_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4248501799977179079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6794245134994913089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7018477966002599341}
   - component: {fileID: 6487858489196140305}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Con.GunpointBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +366,7 @@ GameObject:
   - component: {fileID: 3601943445983997802}
   - component: {fileID: 3601943445983997800}
   - component: {fileID: 2344623692547789316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SensorCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -428,7 +428,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 94723711604822633}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BodyBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 612336549955610017}
   - component: {fileID: 8867694732423050398}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GunpointBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8654508973962455688}
   - component: {fileID: 6300085817689718240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -605,7 +605,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2090484049701975115}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TriggerBone_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,7 +639,7 @@ GameObject:
   - component: {fileID: 6664160554540490931}
   - component: {fileID: 289278519934791706}
   - component: {fileID: 6853402959268602339}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Crossbow
   m_TagString: AllyAttack
   m_Icon: {fileID: 0}
@@ -816,7 +816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3084106198445802904}
   - component: {fileID: 4257471201988774931}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

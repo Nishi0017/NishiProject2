@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7409231417539795103}
   - component: {fileID: 594483003664636893}
   - component: {fileID: -4254618331291723255}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ArrowBox
   m_TagString: AllyAttack
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 7480019132096115463}
   - component: {fileID: 5792058275402480802}
   - component: {fileID: 8612414217786034280}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

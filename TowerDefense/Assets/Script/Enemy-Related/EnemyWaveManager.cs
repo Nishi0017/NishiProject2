@@ -125,7 +125,7 @@ public class EnemyWaveManager : MonoBehaviour
     /// </summary>
     private void UpdateWaitngForStartState()
     {
-        if (Input.GetKeyUp(KeyCode.S))
+        if (Input.GetKeyUp(KeyCode.S) || OVRInput.GetDown(OVRInput.RawButton.A))
         {
             ChangeState(WaveState.SpawnWave);
         }

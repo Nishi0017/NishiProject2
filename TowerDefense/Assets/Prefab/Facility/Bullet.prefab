@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2627592989354803195}
   - component: {fileID: 1464720713672782280}
   - component: {fileID: 2578481177795270370}
-  m_Layer: 2
+  m_Layer: 6
   m_Name: Bullet
   m_TagString: AllyAttack
   m_Icon: {fileID: 0}
@@ -128,3 +128,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+  hitSound: {fileID: 0}

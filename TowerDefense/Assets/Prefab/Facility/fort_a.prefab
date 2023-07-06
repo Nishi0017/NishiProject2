@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346798907299806922}
   - component: {fileID: 739556626336633081}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 870102386694127474}
   - component: {fileID: 870102386694127472}
   - component: {fileID: 743073430292950572}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SensorCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 585827232886300505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6986051096340086084}
   - component: {fileID: 3295054137123890642}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Con.PortBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -242,7 +242,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7484863440969861614}
   - component: {fileID: 743073430170163587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PortBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3396170855269642781}
   - component: {fileID: 3852654614635308426}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6605795687312827783}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Con.PortBone_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6703947010086046233}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BodyBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4671644664403097002}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RootBone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -478,7 +478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4017140115568191900}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PortBone_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 8399657032165871559}
   - component: {fileID: 1358353591}
   - component: {fileID: 743073431409725252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: fort_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
