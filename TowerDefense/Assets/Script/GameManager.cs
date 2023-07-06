@@ -52,10 +52,12 @@ public class GameManager : MonoBehaviour
     public void GetMoney(int _getMoney)
     {
         haveMoney += _getMoney;
+        Debug.Log("GetMoney!" + haveMoney);
     }
 
-    public void UseMoney(int _useMoney)
+    public void UsedMoney(int _usedMoney)
     {
-        haveMoney -= _useMoney;
+        haveMoney -= _usedMoney;
+        Debug.Log("UsedMoney!" + haveMoney);
     }
 }

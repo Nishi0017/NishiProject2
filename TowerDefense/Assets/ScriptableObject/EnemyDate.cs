@@ -9,6 +9,6 @@ public class EnemyDate : ScriptableObject
     public int attackPower; //攻撃力
     public int defensePower; //防御力
     public float speed; //スピード
-    public float reward; //報酬(お金、素材？)
+    public int reward; //報酬(お金、素材？)
     public float experience; //経験値
 }

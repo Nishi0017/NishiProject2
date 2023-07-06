@@ -32,6 +32,14 @@ public class EnemyScript : MonoBehaviour
         level = _level;
     }
 
+    /// <summary>
+    /// “G‚ªƒvƒŒƒCƒ„[(–h‰q{İ)‚ÌUŒ‚‚É‚æ‚Á‚Ä“|‚³‚ê‚½Û‚ÉŒÄ‚Ño‚·•Ï”
+    /// </summary>
+    public void EnemyDefeated()
+    {
+        GameManager.Instance.GetMoney(enemyDate.reward);
+    }
+
     private void OnDestroy()
     {
         UISystemManager uISystemManager = GameObject.FindWithTag("UISystemManager").GetComponent<UISystemManager>();

@@ -26,7 +26,8 @@ public class UISystemManager : MonoBehaviour
         if (haveMoney != GameManager.Instance.HaveMoney)
         {
             haveMoney = GameManager.Instance.HaveMoney;
-            ChangeDefencePointText();
+            Debug.Log("所持金:" + haveMoney);
+            ChangeHaveMoneyText();
         }
     }
 
@@ -51,16 +52,16 @@ public class UISystemManager : MonoBehaviour
 
     private void ChangeEnemyTotalTextt()
     {
-        enemyTotalText.SetText("残りの敵：" + enemyTotal.ToString());
+        enemyTotalText.SetText("Enemy:" + enemyTotal.ToString());
     }
 
     private void ChangeDefencePointText()
     {
-        defencePointText.SetText("体力：" + defencePoint.ToString());
+        defencePointText.SetText("Health:" + defencePoint.ToString());
     }
 
     private void ChangeHaveMoneyText()
     {
-        haveMoneyText.SetText("お金：" + haveMoney.ToString() + "マネー");
+        haveMoneyText.SetText("Money" + haveMoney.ToString());
     }
 }
