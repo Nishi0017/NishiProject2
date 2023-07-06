@@ -15,8 +15,8 @@ public class PassedEnemyScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            enemyWaveManager.PassedEnemy();
             Destroy(other.gameObject);
-            enemyWaveManager.defencePoint--;
         }
     }
 }

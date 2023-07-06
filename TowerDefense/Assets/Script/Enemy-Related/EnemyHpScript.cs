@@ -24,8 +24,9 @@ public class EnemyHpScript : MonoBehaviour
     public void Damage(int _damage)
     {
         currentHp -= _damage;
-        if(currentHp < 0)
+        if(currentHp < 1)
         {
+            GetComponent<EnemyScript>().EnemyDefeated();
             Destroy(gameObject);
         }
         slider.value = (float)currentHp / (float)enemyDate.health;
@@ -35,6 +36,7 @@ public class EnemyHpScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("AllyAttack"))
         {
+
             Damage(other.gameObject.GetComponent<BulletScript>().damage);
             Destroy(other.gameObject);
         }
