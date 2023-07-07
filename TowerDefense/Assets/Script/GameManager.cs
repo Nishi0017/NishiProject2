@@ -1,4 +1,4 @@
-using Newtonsoft.Json.Bson;
+//using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,15 +8,15 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     
-    private bool isPlaying = true; //ƒQ[ƒ€’†‚©‚Ç‚¤‚©‚Ì”»’è
-    private bool isGameCleared = false; //ƒQ[ƒ€ƒNƒŠƒA”»’è
-    private bool isGameOvered = false; //ƒQ[ƒ€ƒI[ƒo[”»’è
+    private bool isPlaying = true; //ã‚²ãƒ¼ãƒ ä¸­ã‹ã©ã†ã‹ã®åˆ¤å®š
+    private bool isGameCleared = false; //ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢åˆ¤å®š
+    private bool isGameOvered = false; //ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼åˆ¤å®š
 
-    private int haveMoney = 0; //‚¨‹à
-    private int score = 0; //ƒXƒRƒA
+    private int haveMoney = 0; //ãŠé‡‘
+    private int score = 0; //ã‚¹ã‚³ã‚¢
 
 
-    //ƒvƒƒpƒeƒBŒo—R‚Å•Ï”‚Ì’l‚ğæ“¾‚·‚é
+    //ãƒ—ãƒ­ãƒ‘ãƒ†ã‚£çµŒç”±ã§å¤‰æ•°ã®å€¤ã‚’å–å¾—ã™ã‚‹
     public static GameManager Instance { get { return instance; } }
     public bool IsPlaying { get { return isPlaying; } }
     public bool IsGameCleared { get { return isGameCleared; } }
@@ -55,9 +55,15 @@ public class GameManager : MonoBehaviour
         Debug.Log("GetMoney!" + haveMoney);
     }
 
-    public void UsedMoney(int _usedMoney)
+    public bool UsedMoney(int _usedMoney)
     {
+        if(haveMoney < _usedMoney)
+        {
+            Debug.Log("ãŠé‡‘ãŒè¶³ã‚Šãªã„ã‚ˆ");
+            return false; 
+        }
         haveMoney -= _usedMoney;
         Debug.Log("UsedMoney!" + haveMoney);
+        return true;
     }
 }
