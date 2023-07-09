@@ -21,10 +21,10 @@ TagManager:
   - UI
   - DefenseLayer
   - EnemyLayer
-  - 
-  - 
-  - 
-  - 
+  - PlayerLayer
+  - WallLayer
+  - FloorLayer
+  - RoofLayer
   - 
   - 
   - 
