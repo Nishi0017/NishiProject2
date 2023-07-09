@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scene/Test_EnemySystem.unity
+- path: Assets/Scene/Test_VR.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

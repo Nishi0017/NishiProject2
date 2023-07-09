@@ -130,9 +130,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870102386694127477}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &743073430292950572
@@ -273,13 +281,14 @@ LookAtConstraint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3664943808491417416}
   m_Enabled: 1
+  serializedVersion: 2
   m_Weight: 1
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_RotationOffset: {x: 90, y: 0, z: 0}
   m_Roll: 0
   m_WorldUpObject: {fileID: 0}
   m_UseUpObject: 0
-  m_IsContraintActive: 1
+  m_Active: 1
   m_IsLocked: 1
   m_Sources:
   - sourceTransform: {fileID: 6986051096340086084}
@@ -645,7 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f18a93373f6be84f81a261602ebec92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotSound: {fileID: 8300000, guid: d52b78246591cb442ac9682b1936326b, type: 3}
+  shotSound: {fileID: 8300000, guid: 65639dc429c23074da1a2fb0ff94a4d9, type: 3}
   AnimSpeed: 0.5
   sensorScript: {fileID: 743073430292950572}
   canShot: 0

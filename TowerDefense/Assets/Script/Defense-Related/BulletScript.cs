@@ -38,6 +38,7 @@ public class BulletScript : MonoBehaviour
         if(audioSource != null)
         {
             Debug.Log("鳴る");
+            audioSource.enabled = true;
             audioSource.PlayOneShot(hitSound);
         }
     }

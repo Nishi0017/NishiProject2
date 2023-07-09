@@ -18,13 +18,22 @@ MonoBehaviour:
     putCost: 5
     deleteCost: 2
     levelUpCost: 10
+    canPutWall: 1
+    canPutFloor: 1
+    canPutRoof: 0
   - facilityPrefab: {fileID: 2861326374261864690, guid: 575d6dc3a0e3d68428df78c3a48a45f6,
       type: 3}
     putCost: 10
     deleteCost: 5
     levelUpCost: 20
+    canPutWall: 0
+    canPutFloor: 1
+    canPutRoof: 0
   - facilityPrefab: {fileID: 5552569036898098659, guid: 4a9847ae46b5d4345a77426f5c28b4fd,
       type: 3}
     putCost: 20
     deleteCost: 10
     levelUpCost: 40
+    canPutWall: 0
+    canPutFloor: 1
+    canPutRoof: 0

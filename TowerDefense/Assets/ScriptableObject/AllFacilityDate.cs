@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(fileName = "AllFacilityDate", menuName = "ScriptableObject/All Facility Date")]
 public class AllFacilityDate : ScriptableObject
 {
-    [Tooltip("Prefab, ƒRƒXƒg, “P‹‚É–ß‚Á‚Ä‚­‚éƒRƒXƒg, ƒŒƒxƒ‹ƒAƒbƒvƒRƒXƒg")]
+    [Tooltip("Prefab, ã‚³ã‚¹ãƒˆ, æ’¤å»æ™‚ã«æˆ»ã£ã¦ãã‚‹ã‚³ã‚¹ãƒˆ, ãƒ¬ãƒ™ãƒ«ã‚¢ãƒƒãƒ—ã‚³ã‚¹ãƒˆ")]
     public FacilityDates[] facilityDates;
 
     [System.Serializable]
@@ -13,5 +13,8 @@ public class AllFacilityDate : ScriptableObject
         public int putCost;
         public int deleteCost;
         public int levelUpCost;
+        public bool canPutWall = true;
+        public bool canPutFloor = true;
+        public bool canPutRoof = false;
     }
 }

@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     private bool isGameCleared = false; //ゲームクリア判定
     private bool isGameOvered = false; //ゲームオーバー判定
 
-    private int haveMoney = 0; //お金
+    private int haveMoney = 100; //お金
     private int score = 0; //スコア
 
 
