@@ -573,6 +573,7 @@
 "Assets/Script/Player-Related/EditFacility.cs"
 "Assets/Script/Player-Related/EditFacility2.cs"
 "Assets/Script/Player-Related/PlayerScript.cs"
+"Assets/Script/UI-Related/SightCanvesManager.cs"
 "Assets/Script/UI-Related/UISystemManager.cs"
 "Assets/ScriptableObject/AllEnemiesDate.cs"
 "Assets/ScriptableObject/AllFacilityDate.cs"

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EditFacility2 : MonoBehaviour
@@ -12,10 +13,15 @@ public class EditFacility2 : MonoBehaviour
     [SerializeField] private GameObject rightController;
     [SerializeField] private GameObject leftController;
 
+    //カメラ
+    [SerializeField] private Transform centerCamera;
+
     [SerializeField] private GameObject confirmPlacementUIPrefab;
 
     private GameObject createdObject; //作成した施設を保存する変数
-    private bool isObjectMoving; //オブジェクトが移動中かどうかのフラグ
+    private GameObject confirmPlacementUI; //設置の確定、キャンセルのUIを保存する変数
+    private bool canCreate = false;
+    private bool canObjectMove = false; //オブジェクトが移動中かどうかのフラグ
 
     //無視するレイヤーマスク
     private LayerMask ignoreLayers;
@@ -28,6 +34,7 @@ public class EditFacility2 : MonoBehaviour
     public enum EditState
     {
         None,
+        PutPosSeeking,
         Put,
         Delete,
         LevelUp
@@ -50,7 +57,7 @@ public class EditFacility2 : MonoBehaviour
 
     private void Start()
     {
-        currentState = EditState.Put;
+        currentState = EditState.None;
         Debug.Log("現在のステート" + currentState);
 
         // Player Layer, Enemy Layer, Defense Layerを無視するレイヤーマスクを作成
@@ -86,7 +93,11 @@ public class EditFacility2 : MonoBehaviour
         switch (currentState)
         {
             case EditState.None:
+                ChangeState(EditState.PutPosSeeking);
+                break;
 
+            case EditState.PutPosSeeking:
+                UpdatePutPosSeekingState();
                 break;
 
             case EditState.Put:
@@ -119,14 +130,84 @@ public class EditFacility2 : MonoBehaviour
 
 
     private int selectFacilityNum = 0;
-    private void UpdatePutState()
+
+    private void UpdatePutPosSeekingState()
     {
         //ステート移行の際に一回だけ実行
         if (stateEnter)
         {
+            canCreate = true;
+            canObjectMove = false;
+        }
+
+        //生成施設の選択
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstick, OVRInput.Controller.RTouch))
+        {
+            selectFacilityNum = (selectFacilityNum + 1) % allFacilityDate.facilityDates.Length;
+            Debug.Log("selectFacilityNum変更" + selectFacilityNum);
+
+            //置けるエリアの更新
+            var facilityDate = allFacilityDate.facilityDates[selectFacilityNum];
+            int wallLayer = LayerMask.NameToLayer("WallLayer");
+            allowedPlacemenLayer = facilityDate.canPutWall ? (allowedPlacemenLayer | (1 << wallLayer)) : (allowedPlacemenLayer & ~(1 << wallLayer));
+
+            int floorLayer = LayerMask.NameToLayer("FloorLayer");
+            allowedPlacemenLayer = facilityDate.canPutFloor ? (allowedPlacemenLayer | (1 << floorLayer)) : (allowedPlacemenLayer & ~(1 << floorLayer));
+
+            int roofLayer = LayerMask.NameToLayer("RoofLayer");
+            allowedPlacemenLayer = facilityDate.canPutRoof ? (allowedPlacemenLayer | (1 << roofLayer)) : (allowedPlacemenLayer & ~(1 << roofLayer));
+
+            if (createdObject != null)
+            {
+                Destroy(createdObject); createdObject = null;
+                CreateFacility();
+            }
 
         }
 
+        if (canCreate)
+        {
+            //施設生成
+            if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+            {
+                CreateFacility();
+            }
+        }
+        else
+        {
+            //施設の移動処理
+            if (canObjectMove)
+            {
+                RaycastHit hit;
+
+                Vector3 rayOrigin = rightController.transform.position;
+                Vector3 rayDirection = rightController.transform.forward;
+
+                if (Physics.Raycast(rayOrigin, rayDirection, out hit, Mathf.Infinity, ignoreLayers))
+                {
+                    //置ける場所以外に施設がいないようにする処理
+                    int hitLayer = hit.collider.gameObject.layer;
+                    if (allowedPlacemenLayer == (allowedPlacemenLayer | (1 << hitLayer)))
+                    {
+                        createdObject.transform.position = hit.point;
+                    }
+                }
+
+                if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+                {
+                    Vector3 uiPos = centerCamera.position + (createdObject.transform.position - centerCamera.position).normalized * 2;
+                    Vector3 toPlayerDistance = createdObject.transform.position - centerCamera.position;
+                    confirmPlacementUI = Instantiate(confirmPlacementUIPrefab, uiPos, Quaternion.LookRotation(toPlayerDistance));
+
+                    canObjectMove = false;
+                }
+            }
+
+
+        }
+    }
+
+        /*
         //施設生成待ち
         if (!isObjectMoving)
         {
@@ -147,13 +228,6 @@ public class EditFacility2 : MonoBehaviour
                 int roofLayer = LayerMask.NameToLayer("RoofLayer");
                 allowedPlacemenLayer = facilityDate.canPutRoof ? (allowedPlacemenLayer | (1 << roofLayer)) : (allowedPlacemenLayer & ~(1 << roofLayer));
 
-                for (int i = 0; i < 32; i++)
-                {
-                    if (allowedPlacemenLayer == (allowedPlacemenLayer | (1 << i)))
-                    {
-                        Debug.Log("含まれている:" + i);
-                    }
-                }
             }
 
             //施設の生成
@@ -207,14 +281,17 @@ public class EditFacility2 : MonoBehaviour
 
                 if (OVRInput.GetDown(OVRInput.RawButton.A))
                 {
-                    Debug.Log("確定UI出現");
-                    GameObject confirmPlacementUI = Instantiate(confirmPlacementUIPrefab, hit.point, Quaternion.LookRotation(hit.normal));
+                    Vector3 uiPos = centerCamera.position + rayDirection * 2;
+                    Vector3 toPlayerDistance = centerCamera.position - hit.point;
+                    GameObject confirmPlacementUI = Instantiate(confirmPlacementUIPrefab, uiPos, Quaternion.LookRotation(toPlayerDistance));
+
+                    isObjectMoving = false;
                 }
 
 
             }
 
-            /*
+            
             //施設の設置確定
             if (OVRInput.GetDown(OVRInput.RawButton.A))
             {
@@ -225,7 +302,7 @@ public class EditFacility2 : MonoBehaviour
                     isObjectMoving = false;
                 }
             }
-            */
+            
 
             //施設の生成キャンセル
             if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
@@ -234,9 +311,57 @@ public class EditFacility2 : MonoBehaviour
                 isObjectMoving = false;
             }
         }
+    */
 
+    private void CreateFacility()
+    {
+        Debug.Log("CreateFacility関数が呼ばれた");
+        RaycastHit hit;
+
+        Vector3 rayOrigin = rightController.transform.position;
+        Vector3 rayDirection = rightController.transform.forward;
+
+        if (Physics.Raycast(rayOrigin, rayDirection, out hit, Mathf.Infinity, ignoreLayers))
+        {
+            int hitLayer = hit.collider.gameObject.layer;
+            Debug.Log("当たったオブジェクト" + hit.collider.gameObject.name);
+            Debug.Log("hitLayer" + hitLayer);
+            if (allowedPlacemenLayer == (allowedPlacemenLayer | (1 << hitLayer)))
+            {
+                GameObject createObject = allFacilityDate.facilityDates[selectFacilityNum].facilityPrefab;
+                Debug.Log("クリエイト" + createObject);
+                createdObject = Instantiate(createObject, hit.point, Quaternion.identity);
+                canCreate = false;
+                canObjectMove = true;
+            }
+        }
+        else //置ける場所ではないときの処理
+        {
+            Debug.Log("おけない場所だよ");
+        }
+    }
+
+    public void PutConfirm()
+    {
+        createdObject = null;
+        Destroy(confirmPlacementUI); confirmPlacementUI = null;
+        canCreate = true;
+        canObjectMove = false;
+    }
+
+    public void PutCancel()
+    {
+        Destroy(createdObject); createdObject = null;
+        Destroy(confirmPlacementUI); confirmPlacementUI = null;
+        canCreate = true;
+        canObjectMove = false;
+    }
+
+    private void UpdatePutState()
+    {
 
     }
+
 
     private void UpdateDeleteState()
     {
