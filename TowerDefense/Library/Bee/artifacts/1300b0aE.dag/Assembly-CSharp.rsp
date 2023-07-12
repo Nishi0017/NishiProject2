@@ -571,6 +571,7 @@
 "Assets/Script/Enemy-Related/Test_HumanScript.cs"
 "Assets/Script/GameManager.cs"
 "Assets/Script/Player-Related/EditFacility.cs"
+"Assets/Script/Player-Related/EditFacility2.cs"
 "Assets/Script/Player-Related/PlayerScript.cs"
 "Assets/Script/UI-Related/UISystemManager.cs"
 "Assets/ScriptableObject/AllEnemiesDate.cs"
