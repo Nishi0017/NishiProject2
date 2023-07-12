@@ -207,6 +207,7 @@ public class EditFacility2 : MonoBehaviour
 
                 if (OVRInput.GetDown(OVRInput.RawButton.A))
                 {
+                    Debug.Log("ämíËUIèoåª");
                     GameObject confirmPlacementUI = Instantiate(confirmPlacementUIPrefab, hit.point, Quaternion.LookRotation(hit.normal));
                 }
 

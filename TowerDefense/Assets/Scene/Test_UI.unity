@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 905364088}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73b631e21b85fc14d842db942e8c7a0b, type: 3}
   m_Name: 
@@ -1148,7 +1148,7 @@ MonoBehaviour:
   allFacilityDate: {fileID: 11400000, guid: d95b75b4eef5a8e44a85299713f94ec6, type: 2}
   rightController: {fileID: 677714930}
   leftController: {fileID: 1385605634}
-  confirmPlacementUIPrefab: {fileID: 7901137124698635707, guid: f0f5bdf51c759044495b674b826aaa58,
+  confirmPlacementUIPrefab: {fileID: 6102089880807113021, guid: de5b9856e58b7f14ebdf0ccb5c309307,
     type: 3}
 --- !u!1 &1092691324
 GameObject:
