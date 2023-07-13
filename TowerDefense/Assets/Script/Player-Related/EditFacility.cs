@@ -12,7 +12,7 @@ public class EditFacility : MonoBehaviour
     [SerializeField] private GameObject rightController;
     [SerializeField] private GameObject leftController;
 
-    private GameObject createdObject;
+    private GameObject createdObject; //作成した施設を保存する変数
     private bool isObjectMoving; //オブジェクトが移動中かどうかのフラグ
 
     //無視するレイヤーマスク
@@ -202,11 +202,14 @@ public class EditFacility : MonoBehaviour
                 {
                     createdObject.transform.position = hit.point;
                 }
+
+                
             }
 
             //施設の設置確定
             if (OVRInput.GetDown(OVRInput.RawButton.A))
             {
+                //所持金を減らし、施設が動かないようにする処理
                 int putCost = allFacilityDate.facilityDates[selectFacilityNum].putCost;
                 if (GameManager.Instance.UsedMoney(putCost))
                 {
