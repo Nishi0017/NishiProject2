@@ -16,12 +16,9 @@ public class EditFacility2 : MonoBehaviour
     //カメラ
     [SerializeField] private Transform centerCamera;
 
+    //設置確定orキャンセルUIのプレハブ
     [SerializeField] private GameObject confirmPlacementUIPrefab;
-
-    private GameObject createdObject; //作成した施設を保存する変数
     private GameObject confirmPlacementUI; //設置の確定、キャンセルのUIを保存する変数
-    private bool canCreate = false;
-    private bool canObjectMove = false; //オブジェクトが移動中かどうかのフラグ
 
     //無視するレイヤーマスク
     private LayerMask ignoreLayers;
@@ -34,7 +31,6 @@ public class EditFacility2 : MonoBehaviour
     public enum EditState
     {
         None,
-        PutPosSeeking,
         Put,
         Delete,
         LevelUp
@@ -93,15 +89,11 @@ public class EditFacility2 : MonoBehaviour
         switch (currentState)
         {
             case EditState.None:
-                ChangeState(EditState.PutPosSeeking);
-                break;
-
-            case EditState.PutPosSeeking:
-                UpdatePutPosSeekingState();
+                ChangeState(EditState.Put);
                 break;
 
             case EditState.Put:
-                UpdatePutState();
+                UpdatePut();
                 break;
 
             case EditState.Delete:
@@ -129,9 +121,15 @@ public class EditFacility2 : MonoBehaviour
     }
 
 
-    private int selectFacilityNum = 0;
+    
 
-    private void UpdatePutPosSeekingState()
+    #region PutState処理
+    private bool canCreate = false;　//オブジェクトが作成可能かどうかのフラグ
+    private bool canObjectMove = false; //オブジェクトが移動中かどうかのフラグ
+    //private Vector3 oldLayerNormal = new Vector3(0, 0, 0); //Rayが当たったレイヤーの法線を保存し、変更があったかどうかを管理するための変数
+    private int selectFacilityNum = 0; //設置する施設のID
+    private GameObject createdObject; //作成した施設を保存する変数
+    private void UpdatePut()
     {
         //ステート移行の際に一回だけ実行
         if (stateEnter)
@@ -140,7 +138,7 @@ public class EditFacility2 : MonoBehaviour
             canObjectMove = false;
         }
 
-        //生成施設の選択
+        //生成施設の変更処理
         if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstick, OVRInput.Controller.RTouch))
         {
             selectFacilityNum = (selectFacilityNum + 1) % allFacilityDate.facilityDates.Length;
@@ -160,6 +158,8 @@ public class EditFacility2 : MonoBehaviour
             if (createdObject != null)
             {
                 Destroy(createdObject); createdObject = null;
+                canCreate= true;
+                canObjectMove = false;
                 CreateFacility();
             }
 
@@ -190,9 +190,14 @@ public class EditFacility2 : MonoBehaviour
                     if (allowedPlacemenLayer == (allowedPlacemenLayer | (1 << hitLayer)))
                     {
                         createdObject.transform.position = hit.point;
+                        if(hit.normal != createdObject.transform.up)
+                        {
+                            createdObject.transform.up = hit.normal;
+                        }
                     }
                 }
 
+                //設置確定orキャンセルのUIの表示
                 if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
                 {
                     Vector3 uiPos = centerCamera.position + (createdObject.transform.position - centerCamera.position).normalized * 2;
@@ -207,115 +212,11 @@ public class EditFacility2 : MonoBehaviour
         }
     }
 
-        /*
-        //施設生成待ち
-        if (!isObjectMoving)
-        {
-            //生成施設の選択
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryThumbstick, OVRInput.Controller.RTouch))
-            {
-                selectFacilityNum = (selectFacilityNum + 1) % allFacilityDate.facilityDates.Length;
-                Debug.Log("selectFacilityNum変更" + selectFacilityNum);
-
-                //置けるエリアの更新
-                var facilityDate = allFacilityDate.facilityDates[selectFacilityNum];
-                int wallLayer = LayerMask.NameToLayer("WallLayer");
-                allowedPlacemenLayer = facilityDate.canPutWall ? (allowedPlacemenLayer | (1 << wallLayer)) : (allowedPlacemenLayer & ~(1 << wallLayer));
-
-                int floorLayer = LayerMask.NameToLayer("FloorLayer");
-                allowedPlacemenLayer = facilityDate.canPutFloor ? (allowedPlacemenLayer | (1 << floorLayer)) : (allowedPlacemenLayer & ~(1 << floorLayer));
-
-                int roofLayer = LayerMask.NameToLayer("RoofLayer");
-                allowedPlacemenLayer = facilityDate.canPutRoof ? (allowedPlacemenLayer | (1 << roofLayer)) : (allowedPlacemenLayer & ~(1 << roofLayer));
-
-            }
-
-            //施設の生成
-            if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
-            {
-                //所持金が足りるか
-                int putCost = allFacilityDate.facilityDates[selectFacilityNum].putCost;
-                if (GameManager.Instance.HaveMoney >= putCost)
-                {
-                    RaycastHit hit;
-
-                    Vector3 rayOrigin = rightController.transform.position;
-                    Vector3 rayDirection = rightController.transform.forward;
-
-                    if (Physics.Raycast(rayOrigin, rayDirection, out hit, Mathf.Infinity, ignoreLayers))
-                    {
-                        int hitLayer = hit.collider.gameObject.layer;
-                        Debug.Log("当たったオブジェクト" + hit.collider.gameObject.name);
-                        Debug.Log("hitLayer" + hitLayer);
-                        if (allowedPlacemenLayer == (allowedPlacemenLayer | (1 << hitLayer)))
-                        {
-                            GameObject createObject = allFacilityDate.facilityDates[selectFacilityNum].facilityPrefab;
-                            Debug.Log("クリエイト" + createObject);
-                            createdObject = Instantiate(createObject, hit.point, Quaternion.identity);
-                            isObjectMoving = true;
-                        }
-                    }
-                }
-                else
-                {
-
-                }
-
-            }
-        }
-        else
-        {
-            //施設の移動
-            RaycastHit hit;
-
-            Vector3 rayOrigin = rightController.transform.position;
-            Vector3 rayDirection = rightController.transform.forward;
-
-            if (Physics.Raycast(rayOrigin, rayDirection, out hit, Mathf.Infinity, ignoreLayers))
-            {
-                int hitLayer = hit.collider.gameObject.layer;
-                if (allowedPlacemenLayer == (allowedPlacemenLayer | (1 << hitLayer)))
-                {
-                    createdObject.transform.position = hit.point;
-                }
-
-                if (OVRInput.GetDown(OVRInput.RawButton.A))
-                {
-                    Vector3 uiPos = centerCamera.position + rayDirection * 2;
-                    Vector3 toPlayerDistance = centerCamera.position - hit.point;
-                    GameObject confirmPlacementUI = Instantiate(confirmPlacementUIPrefab, uiPos, Quaternion.LookRotation(toPlayerDistance));
-
-                    isObjectMoving = false;
-                }
-
-
-            }
-
-            
-            //施設の設置確定
-            if (OVRInput.GetDown(OVRInput.RawButton.A))
-            {
-                //所持金を減らし、施設が動かないようにする処理
-                int putCost = allFacilityDate.facilityDates[selectFacilityNum].putCost;
-                if (GameManager.Instance.UsedMoney(putCost))
-                {
-                    isObjectMoving = false;
-                }
-            }
-            
-
-            //施設の生成キャンセル
-            if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
-            {
-                Destroy(createdObject);
-                isObjectMoving = false;
-            }
-        }
-    */
-
+    /// <summary>
+    /// 施設の生成
+    /// </summary>
     private void CreateFacility()
     {
-        Debug.Log("CreateFacility関数が呼ばれた");
         RaycastHit hit;
 
         Vector3 rayOrigin = rightController.transform.position;
@@ -324,13 +225,13 @@ public class EditFacility2 : MonoBehaviour
         if (Physics.Raycast(rayOrigin, rayDirection, out hit, Mathf.Infinity, ignoreLayers))
         {
             int hitLayer = hit.collider.gameObject.layer;
-            Debug.Log("当たったオブジェクト" + hit.collider.gameObject.name);
-            Debug.Log("hitLayer" + hitLayer);
+
+            //当たったレイヤーの位置に施設が置けるかどうかの条件分岐
             if (allowedPlacemenLayer == (allowedPlacemenLayer | (1 << hitLayer)))
             {
                 GameObject createObject = allFacilityDate.facilityDates[selectFacilityNum].facilityPrefab;
-                Debug.Log("クリエイト" + createObject);
-                createdObject = Instantiate(createObject, hit.point, Quaternion.identity);
+                createdObject = Instantiate(createObject, hit.point, Quaternion.identity);　//施設の設置
+                createdObject.transform.up = hit.normal;
                 canCreate = false;
                 canObjectMove = true;
             }
@@ -356,11 +257,7 @@ public class EditFacility2 : MonoBehaviour
         canCreate = true;
         canObjectMove = false;
     }
-
-    private void UpdatePutState()
-    {
-
-    }
+    #endregion
 
 
     private void UpdateDeleteState()
