@@ -317,7 +317,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7018477966002599341}
-  - component: {fileID: 6487858489196140305}
   m_Layer: 6
   m_Name: Con.GunpointBone
   m_TagString: Untagged
@@ -341,20 +340,6 @@ Transform:
   m_Father: {fileID: 94723711604822633}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6487858489196140305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2983235985555572264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024e5d89e24771b4287dd36e2b8cbfd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensorObject: {fileID: 3601943445983997805}
-  moveDirection: 2
 --- !u!1 &3601943445983997805
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,9 +381,17 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3601943445983997805}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 1
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2344623692547789316
@@ -418,6 +411,9 @@ MonoBehaviour:
   searchAngle: 360
   aimingSpeed: 1
   ctrlBone: {fileID: 2983235985555572264}
+  cantMove_x: 0
+  cantMove_y: 1
+  cantMove_z: 0
   closestEnemy: {fileID: 0}
 --- !u!1 &4730549147614186659
 GameObject:
@@ -476,7 +472,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5058847473775353565}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0.00000013240823, z: -0.00000013240823, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -493,13 +489,14 @@ LookAtConstraint:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5058847473775353565}
   m_Enabled: 1
+  serializedVersion: 2
   m_Weight: 1
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_RotationOffset: {x: 90, y: 0, z: 0}
   m_Roll: 0
   m_WorldUpObject: {fileID: 0}
   m_UseUpObject: 0
-  m_IsContraintActive: 1
+  m_Active: 1
   m_IsLocked: 1
   m_Sources:
   - sourceTransform: {fileID: 7018477966002599341}
@@ -783,6 +780,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &6853402959268602339
 MonoBehaviour:
   m_ObjectHideFlags: 0

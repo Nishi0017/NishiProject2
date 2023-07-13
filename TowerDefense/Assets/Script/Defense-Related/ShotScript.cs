@@ -105,7 +105,6 @@ public class ShotScript : MonoBehaviour
     private void Shot(Vector3 shotDistance)
     {
         audioSource.PlayOneShot(shotSound);
-        shotDistance.y = 0.0f;
         GameObject bulletObject = Instantiate
             (
                 bulletPrefab, 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1099564929645732122, guid: a7dfab51b7b72964f91ae9b43f0bc925, type: 3}
   enemyName: GreenChan
-  health: 100
+  health: 100000
   attackPower: 10
   defensePower: 10
   speed: 3.5

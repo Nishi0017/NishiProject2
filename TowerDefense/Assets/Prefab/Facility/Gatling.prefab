@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9213296302471398463}
-  - component: {fileID: 924967720760143740}
   m_Layer: 0
   m_Name: Con.Gunpoint
   m_TagString: Untagged
@@ -33,20 +32,6 @@ Transform:
   m_Father: {fileID: 3390138010625891484}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &924967720760143740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924967720760143741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024e5d89e24771b4287dd36e2b8cbfd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensorObject: {fileID: 9084182666148726548}
-  moveDirection: 0
 --- !u!1 &1681029121186592714
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,7 +645,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rayShot: 1
   searchRadius: 10
-  searchAngle: 70
+  searchAngle: 360
   aimingSpeed: 0.5
   ctrlBone: {fileID: 924967720760143741}
+  cantMove_x: 0
+  cantMove_y: 0
+  cantMove_z: 0
   closestEnemy: {fileID: 0}

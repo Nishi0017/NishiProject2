@@ -24,6 +24,10 @@ public class SensorScript : MonoBehaviour
 
     //防衛施設の向きを変更させるボーンオブジェクトを入れる変数
     [SerializeField] private GameObject ctrlBone;
+    //防衛施設の向きを変更させるボーンオブジェクトが移動できる方向
+    [SerializeField] private bool cantMove_x;
+    [SerializeField] private bool cantMove_y;
+    [SerializeField] private bool cantMove_z;
 
     //感知範囲内にいる敵を入れるリスト
     private List<GameObject> visibleEnemies = new List<GameObject>();
@@ -35,7 +39,9 @@ public class SensorScript : MonoBehaviour
     {
         //防衛施設の初期位置、正面を保存する
         defaultPos = ctrlBone.transform.position;
-        defaultForward = ctrlBone.transform.forward;
+        defaultForward = transform.forward;
+        Debug.Log("正面" + defaultForward);
+        Debug.DrawRay(transform.position, defaultForward*100, Color.red, 1000f, true);
 
         //防衛施設の感知範囲半径をSphereCollideコンポーネントから取得する
         searchRadius = gameObject.GetComponent<SphereCollider>().radius;
@@ -54,11 +60,24 @@ public class SensorScript : MonoBehaviour
         //感知範囲内にいる敵をvisibleEnemiesリストに入れる
         foreach (Collider objectInCollider in objectsInCollider)
         {
+            //敵への方向
             Vector3 directionToEnemy = objectInCollider.transform.position - transform.position;
-            directionToEnemy.y = 0;
+
+            //感知しない方向処理
+            if(cantMove_x)
+                directionToEnemy.x = 0;
+            if(cantMove_y)
+                directionToEnemy.y = 0;
+            if(cantMove_z)
+                directionToEnemy.z = 0;
+
+            Debug.DrawRay(transform.position, directionToEnemy, Color.red, 0.1f, true);
+
+            //敵との角度
             float angleToEnemy = Vector3.Angle(defaultForward, directionToEnemy);
 
-            if ((searchAngle * -0.5f <= angleToEnemy || angleToEnemy <= searchAngle * 0.5f) && !IsOtherObjectBetween(objectInCollider.gameObject.transform))
+            //感知角度内、間に他のオブジェクトがあるかの条件分岐
+            if (angleToEnemy <= searchAngle * 0.5f && !IsOtherObjectBetween(objectInCollider.gameObject.transform))
             {
                 //既にListに入っている敵を新たにListに入れないための条件分岐
                 if (!visibleEnemies.Contains(objectInCollider.gameObject))
@@ -93,7 +112,13 @@ public class SensorScript : MonoBehaviour
                 //オブジェクトの衝突によるダメージか、Rayの衝突によるダメージかでの場合分け
                 Vector3 closestEnemyPos = rayShot ? closestEnemy.transform.position : closestEnemy.transform.GetChild(0).transform.position;
 
-                closestEnemyPos = new Vector3(closestEnemyPos.x, defaultPos.y, closestEnemyPos.z);
+                if (cantMove_x)
+                    closestEnemyPos.x = defaultPos.x;
+                if(cantMove_y) 
+                    closestEnemyPos.y = defaultPos.y;
+                if (cantMove_z)
+                    closestEnemyPos.z = defaultPos.z;
+
                 ctrlBone.transform.position = Vector3.Lerp(ctrlBone.transform.position, closestEnemyPos, aimingSpeed);
             }
         }
@@ -111,13 +136,24 @@ public class SensorScript : MonoBehaviour
         List<GameObject> remainingEnemies = new List<GameObject>();
         foreach (GameObject enemy in visibleEnemies)
         {
+            //敵への方向
             Vector3 directionToEnemy = enemy.transform.position - transform.position;
-            directionToEnemy.y = 0;
+            
+            //感知しない方向
+            if (cantMove_x)
+                directionToEnemy.x = 0;
+            if (cantMove_y)
+                directionToEnemy.y = 0;
+            if (cantMove_z)
+                directionToEnemy.z = 0;
+
+            //敵との角度
             float angleToEnemy = Vector3.Angle(defaultForward, directionToEnemy);
 
             float distanceToEnemy = directionToEnemy.sqrMagnitude;
 
-            if ((searchAngle * -0.5f <= angleToEnemy || angleToEnemy <= searchAngle * 0.5f) && distanceToEnemy <= searchRadius * searchRadius && !IsOtherObjectBetween(enemy.transform))
+            //感知角度・範囲内、間に他のオブジェクトがあるかの条件分岐
+            if (angleToEnemy <= searchAngle * 0.5f && distanceToEnemy <= searchRadius * searchRadius && !IsOtherObjectBetween(enemy.transform))
             {
                 remainingEnemies.Add(enemy.gameObject);
             }
