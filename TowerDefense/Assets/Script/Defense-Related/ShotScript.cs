@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class ShotScript : MonoBehaviour
@@ -43,6 +42,8 @@ public class ShotScript : MonoBehaviour
         }
 
         lastPos = transform.position;
+
+        timer = shotInterval;
     }
 
     private void Update()
@@ -77,7 +78,7 @@ public class ShotScript : MonoBehaviour
             //timerのリセット
             if(canShot)
             {
-                timer = 0.0f;
+                timer = shotInterval;
             }
 
             return;

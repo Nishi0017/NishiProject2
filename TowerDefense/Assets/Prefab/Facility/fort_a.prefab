@@ -252,7 +252,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3664943808491417416}
-  m_LocalRotation: {x: -0, y: -0.0000016852815, z: -1, w: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0.00000112547, z: 0.7071068, w: 0.00000112547}
   m_LocalPosition: {x: 1.540046e-14, y: -0.100000024, z: 0.0000037501766}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -506,8 +506,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8399657032165871559}
-  - component: {fileID: 1358353591}
   - component: {fileID: 743073431409725252}
+  - component: {fileID: 1358353591}
   m_Layer: 6
   m_Name: fort_a
   m_TagString: Untagged
@@ -534,6 +534,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &743073431409725252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9212749920768595325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f18a93373f6be84f81a261602ebec92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotSound: {fileID: 8300000, guid: 65639dc429c23074da1a2fb0ff94a4d9, type: 3}
+  AnimSpeed: 0.5
+  sensorScript: {fileID: 743073430292950572}
+  canShot: 0
+  bulletPrefab: {fileID: 2627592989354803194, guid: f3f692c05e02c1b4b84929c863d8f3d4,
+    type: 3}
+  ctrlBone: {fileID: 6986051096340086084}
+  bulletSpawnPoint: {fileID: 4017140115568191900}
+  bulletSpeed: 10
+  shotInterval: 1
+  bulletDamage: 10
 --- !u!82 &1358353591
 AudioSource:
   m_ObjectHideFlags: 0
@@ -630,26 +653,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &743073431409725252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9212749920768595325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f18a93373f6be84f81a261602ebec92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shotSound: {fileID: 8300000, guid: 65639dc429c23074da1a2fb0ff94a4d9, type: 3}
-  AnimSpeed: 0.5
-  sensorScript: {fileID: 743073430292950572}
-  canShot: 0
-  bulletPrefab: {fileID: 2627592989354803194, guid: f3f692c05e02c1b4b84929c863d8f3d4,
-    type: 3}
-  ctrlBone: {fileID: 6986051096340086084}
-  bulletSpawnPoint: {fileID: 4017140115568191900}
-  bulletSpeed: 10
-  shotInterval: 1
-  bulletDamage: 10

@@ -2319,6 +2319,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7901137123980793342, guid: f0f5bdf51c759044495b674b826aaa58,
+        type: 3}
+      propertyPath: m_text
+      value: Money:100
+      objectReference: {fileID: 0}
     - target: {fileID: 7901137124698635705, guid: f0f5bdf51c759044495b674b826aaa58,
         type: 3}
       propertyPath: m_RootOrder
